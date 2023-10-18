@@ -7,15 +7,18 @@ namespace HikeGroop.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly DataContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, DataContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var groups = _context.Groups.ToList();
+        return View(groups);
     }
 
     public IActionResult Privacy()
