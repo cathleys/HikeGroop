@@ -13,7 +13,7 @@ public class Destination
     public string? Image { get; set; }
 
     public HikingCategory HikingCategory { get; set; }
-    public HikingTour HikingTourType { get; set; }
+    public HikingTour HikingTour { get; set; }
     public TrailClass TrailClass { get; set; }
 
     [ForeignKey("Itinerary")]
