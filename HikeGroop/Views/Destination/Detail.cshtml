@@ -1,0 +1,51 @@
+﻿@model Destination
+
+@{
+    ViewData["Title"] = "Destination";
+}
+
+<link rel="stylesheet" href="~/css/detail.css" asp-append-version="true" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title p-2">@Model.Title</h3>
+ 
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-6 p-1" >
+                    
+                    <img src="@Model.Image" 
+                     style="width: 400px;">
+                    
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-6">
+                    <h4 class="box-title mt-5">Description</h4>
+                    <p>@Model.Description</p>
+                    
+                    <h4 class="box-title mt-5">Itineray</h4>
+                    <ul class="list-unstyled">
+                        <li><strong>MeetUp: </strong>@Model.Itinerary.MeetUp</li>
+                        <li><strong>Jump Off Point: </strong>@Model.Itinerary.JumpOffPoint</li>
+                        <li><strong>Location: </strong>@Model.Itinerary.Location</li>
+                        <li><strong>Elevation: </strong>@Model.Itinerary.Elevation</li>
+                        <li><strong>Days Required: </strong>@Model.Itinerary.DaysRequired</li>
+                        <li><strong>Hours to Summit: </strong>@Model.Itinerary.HoursToSummit</li>
+                    </ul>
+                    
+                    <button class="btn btn-success btn-rounded mr-1">
+                        Join Activity
+                    </button>
+    
+                    <h3 class="box-title mt-5">Information</h3>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-check text-success"></i>@Model.HikingTour</li>
+                        <li><i class="fa fa-check text-success"></i>@Model.HikingCategory</li>
+                        <li><i class="fa fa-check text-success"></i>@Model.TrailClass</li>
+                    </ul>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</div>
