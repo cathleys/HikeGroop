@@ -17,5 +17,13 @@ namespace HikeGroop.Controllers
             var dest = _context.Destinations.ToList();
             return View(dest);
         }
+
+        public IActionResult Detail(int id)
+        {
+            var dest = _context.Destinations
+                .Include(d=> d.Itinerary)
+                .FirstOrDefault(d=> d.Id ==id);
+            return View(dest);
+        }
     }
 }

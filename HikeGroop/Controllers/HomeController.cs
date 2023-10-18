@@ -19,7 +19,8 @@ public class HomeController : Controller
     {
         var groups = _context.Groups.ToList();
         return View(groups);
-    }
+    }  
+    
 
     public IActionResult Privacy()
     {

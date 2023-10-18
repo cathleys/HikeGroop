@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HikeGroop.Controllers
 {
@@ -15,6 +16,14 @@ namespace HikeGroop.Controllers
         {
             var groups = _context.Groups.ToList();
             return View(groups);
+        } 
+        
+        public IActionResult Detail(int id)
+        {
+            var group = _context.Groups
+                .Include(g=>g.Address)
+                .FirstOrDefault(g=>g.Id == id);
+            return View(group);
         }
     }
 }
