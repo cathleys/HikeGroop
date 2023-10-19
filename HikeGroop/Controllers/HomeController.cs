@@ -1,23 +1,24 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using HikeGroop.Models;
+using HikeGroop.Interfaces;
 
 namespace HikeGroop.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly DataContext _context;
+    private readonly IGroupRepository _groupRepository;
 
-    public HomeController(ILogger<HomeController> logger, DataContext context)
+    public HomeController(ILogger<HomeController> logger, IGroupRepository groupRepository)
     {
         _logger = logger;
-        _context = context;
+       _groupRepository = groupRepository;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var groups = _context.Groups.ToList();
+        var groups = await _groupRepository.GetGroups();
         return View(groups);
     }  
     
