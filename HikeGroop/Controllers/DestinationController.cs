@@ -1,28 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HikeGroop.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HikeGroop.Controllers
 {
     public class DestinationController : Controller
     {
-        private readonly DataContext _context;
+        private readonly IDestinationRepository _destinationRepository;
 
-        public DestinationController(DataContext context)
+        public DestinationController(IDestinationRepository destinationRepository)
         {
-            _context = context;
+            _destinationRepository = destinationRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var dest = _context.Destinations.ToList();
-            return View(dest);
+            var dests = await _destinationRepository.GetDestinations();
+            return View(dests);
         }
 
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
-            var dest = _context.Destinations
-                .Include(d=> d.Itinerary)
-                .FirstOrDefault(d=> d.Id ==id);
+            var dest = await _destinationRepository.GetDestinationByIdAsync(id);
             return View(dest);
         }
     }

@@ -1,5 +1,6 @@
 using HikeGroop;
 using HikeGroop.Data;
+using HikeGroop.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,7 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
