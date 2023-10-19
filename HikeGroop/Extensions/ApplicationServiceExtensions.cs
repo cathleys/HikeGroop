@@ -1,5 +1,7 @@
-﻿using HikeGroop.Interfaces;
+﻿using HikeGroop.Helpers;
+using HikeGroop.Interfaces;
 using HikeGroop.Repositories;
+using HikeGroop.Services;
 
 namespace HikeGroop.Extensions
 {
@@ -7,11 +9,15 @@ namespace HikeGroop.Extensions
     {
        
 
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services,
+            IConfiguration config)
         {
 
            services.AddScoped<IDestinationRepository, DestinationRepository>();
            services.AddScoped<IGroupRepository, GroupRepository>();
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.AddScoped<IPhotoService, PhotoService>();
+
             return services;
         }
     }
