@@ -6,6 +6,7 @@ namespace HikeGroop.Interfaces
     {
         Task<IEnumerable<Destination>> GetDestinations();
         Task<Destination> GetDestinationByIdAsync(int id);
+        Task<Destination> GetDestinationByIdAsyncNoTracking(int id);
         Task<bool> Add(Destination destination);
         Task<bool> Update(Destination destination);
         Task<bool> Delete(Destination destination);

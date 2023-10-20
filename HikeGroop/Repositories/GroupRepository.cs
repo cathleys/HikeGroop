@@ -32,6 +32,14 @@ namespace HikeGroop.Repositories
                 .FirstOrDefaultAsync(g => g.Id == id);
         }
 
+        public async Task<Group> GetGroupByIdAsyncNoTracking(int id)
+        {
+            return await _context.Groups
+                .AsNoTracking()
+                .Include(g => g.Address)
+                .FirstOrDefaultAsync(g => g.Id == id);
+        }
+
         public async Task<IEnumerable<Group>> GetGroups()
         {
             return await _context.Groups.ToListAsync();
