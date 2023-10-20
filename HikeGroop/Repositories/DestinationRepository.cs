@@ -1,4 +1,5 @@
-﻿using HikeGroop.Interfaces;
+﻿using HikeGroop.Data;
+using HikeGroop.Interfaces;
 using HikeGroop.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,7 +31,7 @@ namespace HikeGroop.Repositories
             return await _context.Destinations
                 .Include(g => g.Itinerary)
                 .FirstOrDefaultAsync(g => g.Id == id);
-                
+
         }
 
         public async Task<Destination> GetDestinationByIdAsyncNoTracking(int id)
@@ -56,6 +57,7 @@ namespace HikeGroop.Repositories
         {
             _context.Update(destination);
             return await Save();
-;        }
+            ;
+        }
     }
 }

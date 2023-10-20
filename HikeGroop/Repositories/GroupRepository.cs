@@ -1,4 +1,5 @@
-﻿using HikeGroop.Interfaces;
+﻿using HikeGroop.Data;
+using HikeGroop.Interfaces;
 using HikeGroop.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,7 @@ namespace HikeGroop.Repositories
 
         public GroupRepository(DataContext context)
         {
-           _context = context;
+            _context = context;
         }
 
         public async Task<bool> Add(Group group)
@@ -27,9 +28,9 @@ namespace HikeGroop.Repositories
 
         public async Task<Group> GetGroupByIdAsync(int id)
         {
-          return await  _context.Groups
-                .Include(g => g.Address)
-                .FirstOrDefaultAsync(g => g.Id == id);
+            return await _context.Groups
+                  .Include(g => g.Address)
+                  .FirstOrDefaultAsync(g => g.Id == id);
         }
 
         public async Task<Group> GetGroupByIdAsyncNoTracking(int id)
@@ -47,7 +48,7 @@ namespace HikeGroop.Repositories
 
         public async Task<IEnumerable<Group>> GetGroupsByCity(string city)
         {
-            return await _context.Groups.Where(g=> g.Address.City
+            return await _context.Groups.Where(g => g.Address.City
             .Contains(city)).ToListAsync();
         }
 
