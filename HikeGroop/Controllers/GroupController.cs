@@ -64,5 +64,101 @@ namespace HikeGroop.Controllers
             return View(groupVM);
 
 ;        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var group = await _groupRepository.GetGroupByIdAsync(id);
+
+            if (group == null) return View("Error");
+
+            var groupVM = new EditGroupViewModel
+            {
+                Name = group.Name,
+                Description = group.Description,
+                Url = group.Image,
+                AddressId = (int)group.AddressId,
+                Address = new Address 
+                { 
+                City = group.Address.City
+                }
+
+            };
+
+            return View(groupVM);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditGroupViewModel editGroupViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Failed to edit group");
+                return View("Edit", editGroupViewModel);
+            }
+
+            var getGroup = await _groupRepository.GetGroupByIdAsyncNoTracking(id);
+          
+            if(getGroup != null)
+            {
+                try
+                {
+                    var file = new FileInfo(getGroup.Image);
+                    var publicId = Path.GetFileNameWithoutExtension(file.Name);
+
+                    await _photoService.DeletePhotoAsync(publicId);
+                }catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Failed to delete photo");
+                    return View(editGroupViewModel);
+                }
+
+                var imageResult = await _photoService.AddPhotoAsync(editGroupViewModel.Image);
+
+                
+                var editGroup = new Group
+                {
+                    Id = id,
+                    Name = editGroupViewModel.Name,
+                    Description = editGroupViewModel.Description,
+                    Image = imageResult.SecureUrl.AbsoluteUri,
+                    AddressId = editGroupViewModel.AddressId,
+                    Address = editGroupViewModel.Address
+
+
+                };
+
+               await _groupRepository.Update(editGroup);
+               return RedirectToAction("Index");
+
+            }else
+            {
+                return View(editGroupViewModel);
+            }
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var group = await _groupRepository.GetGroupByIdAsync(id);
+            if (group == null) return View("Error");
+
+            return View(group);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteGroup(int id)
+        {
+            var group = await _groupRepository.GetGroupByIdAsync(id);
+
+            if (group == null) return View("Error");
+
+            if (!string.IsNullOrEmpty(group.Image))
+            {
+                await _photoService.DeletePhotoAsync(group.Image);
+            }
+
+            await _groupRepository.Delete(group);
+            return RedirectToAction("Index");
+        }
     }
 }
