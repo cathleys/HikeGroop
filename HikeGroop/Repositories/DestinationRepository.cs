@@ -33,6 +33,15 @@ namespace HikeGroop.Repositories
                 
         }
 
+        public async Task<Destination> GetDestinationByIdAsyncNoTracking(int id)
+        {
+            return await _context.Destinations
+                .Include(g => g.Itinerary)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(g => g.Id == id);
+
+        }
+
         public async Task<IEnumerable<Destination>> GetDestinations()
         {
             return await _context.Destinations.ToListAsync();
