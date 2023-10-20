@@ -1,6 +1,9 @@
 using HikeGroop;
 using HikeGroop.Data;
 using HikeGroop.Extensions;
+using HikeGroop.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,12 +17,23 @@ builder.Services.AddDbContext<DataContext>(opt =>
 
 builder.Services.AddApplicationServices(builder.Configuration);
 
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+.AddEntityFrameworkStores<DataContext>();
+
+builder.Services.AddMemoryCache();
+
+builder.Services.AddSession();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddCookie();
+
+
 var app = builder.Build();
 
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
 {
-    // await Seed.SeedUsersAndRolesAsync(app);
-    Seed.SeedData(app);
+    await Seed.SeedUsersAndRolesAsync(app);
+    // Seed.SeedData(app);
 }
 
 
