@@ -1,4 +1,5 @@
 ﻿using HikeGroop.Data.Enums;
+using HikeGroop.Extensions;
 using HikeGroop.Interfaces;
 using HikeGroop.Models;
 using HikeGroop.ViewModels;
@@ -11,12 +12,14 @@ namespace HikeGroop.Controllers
     {
         private readonly IDestinationRepository _destinationRepository;
         private readonly IPhotoService _photoService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public DestinationController(IDestinationRepository destinationRepository,
-            IPhotoService photoService)
+            IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
         {
             _destinationRepository = destinationRepository;
             _photoService = photoService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> Index()
@@ -31,9 +34,14 @@ namespace HikeGroop.Controllers
             return View(dest);
         }
 
-        public  IActionResult Create()
+        public IActionResult Create()
         {
-            return View();
+            var currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            var createDestinationViewModel = new CreateDestinationViewModel
+            {
+                AppUserId = currentUserId
+            };
+            return View(createDestinationViewModel);
         }
 
         [HttpPost]
@@ -51,6 +59,7 @@ namespace HikeGroop.Controllers
                     HikingCategory = editDestViewModel.HikingCategory,
                     HikingTour = editDestViewModel.HikingTour,
                     TrailClass = editDestViewModel.TrailClass,
+                    AppUserId = editDestViewModel.AppUserId,
                     Itinerary = new Itinerary
                     {
                         MeetUp = editDestViewModel.Itinerary.MeetUp,
@@ -76,7 +85,7 @@ namespace HikeGroop.Controllers
         }
 
 
-        
+
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -102,10 +111,10 @@ namespace HikeGroop.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditDestinationViewModel editDestViewModel)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Failed to update Destination");
-                return View("Edit",editDestViewModel);
+                return View("Edit", editDestViewModel);
             }
 
             var getDestination = await _destinationRepository.GetDestinationByIdAsyncNoTracking(id);
@@ -117,7 +126,8 @@ namespace HikeGroop.Controllers
                     var publicId = Path.GetFileNameWithoutExtension(file.Name);
 
                     await _photoService.DeletePhotoAsync(publicId);
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     ModelState.AddModelError("", "Failed to delete photo");
                     return View(editDestViewModel);
@@ -162,7 +172,7 @@ namespace HikeGroop.Controllers
         public async Task<IActionResult> DeleteDestination(int id)
         {
             var dest = await _destinationRepository.GetDestinationByIdAsync(id);
-            if(dest == null) return View("Error");
+            if (dest == null) return View("Error");
 
             if (!string.IsNullOrEmpty(dest.Image))
             {
