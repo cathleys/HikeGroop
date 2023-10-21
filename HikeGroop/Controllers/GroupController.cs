@@ -1,4 +1,5 @@
-﻿using HikeGroop.Interfaces;
+﻿using HikeGroop.Extensions;
+using HikeGroop.Interfaces;
 using HikeGroop.Models;
 using HikeGroop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -10,31 +11,36 @@ namespace HikeGroop.Controllers
     {
         private readonly IGroupRepository _groupRepository;
         private readonly IPhotoService _photoService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public GroupController(IGroupRepository groupRepository,
-            IPhotoService photoService)
+            IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
         {
             _groupRepository = groupRepository;
             _photoService = photoService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> Index()
         {
             var groups = await _groupRepository.GetGroups();
-            return  View(groups);
-        } 
-        
+            return View(groups);
+        }
+
         public async Task<IActionResult> Detail(int id)
         {
             var group = await _groupRepository.GetGroupByIdAsync(id);
-                
+
             return View(group);
         }
 
-       public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
-;        }
+            var currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            var createGroupViewModel = new CreateGroupViewModel { AppUserId = currentUserId };
+            return View(createGroupViewModel);
+            ;
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateGroupViewModel groupVM)
@@ -47,15 +53,17 @@ namespace HikeGroop.Controllers
                 {
                     Name = groupVM.Name,
                     Description = groupVM.Description,
+                    AppUserId = groupVM.AppUserId,
                     Image = imageResult.SecureUrl.AbsoluteUri,
-                    Address = new Address 
-                    { 
+
+                    Address = new Address
+                    {
                         City = groupVM.Address.City
                     }
 
                 };
-            await _groupRepository.Add(newGroup);
-            return RedirectToAction("Index");
+                await _groupRepository.Add(newGroup);
+                return RedirectToAction("Index");
             }
             else
             {
@@ -63,7 +71,8 @@ namespace HikeGroop.Controllers
             }
             return View(groupVM);
 
-;        }
+            ;
+        }
 
         public async Task<IActionResult> Edit(int id)
         {
@@ -77,9 +86,9 @@ namespace HikeGroop.Controllers
                 Description = group.Description,
                 Url = group.Image,
                 AddressId = (int)group.AddressId,
-                Address = new Address 
-                { 
-                City = group.Address.City
+                Address = new Address
+                {
+                    City = group.Address.City
                 }
 
             };
@@ -98,8 +107,8 @@ namespace HikeGroop.Controllers
             }
 
             var getGroup = await _groupRepository.GetGroupByIdAsyncNoTracking(id);
-          
-            if(getGroup != null)
+
+            if (getGroup != null)
             {
                 try
                 {
@@ -107,7 +116,8 @@ namespace HikeGroop.Controllers
                     var publicId = Path.GetFileNameWithoutExtension(file.Name);
 
                     await _photoService.DeletePhotoAsync(publicId);
-                }catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     ModelState.AddModelError("", "Failed to delete photo");
                     return View(editGroupViewModel);
@@ -115,7 +125,7 @@ namespace HikeGroop.Controllers
 
                 var imageResult = await _photoService.AddPhotoAsync(editGroupViewModel.Image);
 
-                
+
                 var editGroup = new Group
                 {
                     Id = id,
@@ -128,10 +138,11 @@ namespace HikeGroop.Controllers
 
                 };
 
-               await _groupRepository.Update(editGroup);
-               return RedirectToAction("Index");
+                await _groupRepository.Update(editGroup);
+                return RedirectToAction("Index");
 
-            }else
+            }
+            else
             {
                 return View(editGroupViewModel);
             }

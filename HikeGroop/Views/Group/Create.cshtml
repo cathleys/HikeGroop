@@ -1,7 +1,8 @@
-﻿@model Group
+﻿@using HikeGroop.ViewModels;
+@model CreateGroupViewModel
 
 <form method="post" asp-action="Create" enctype="multipart/form-data">
-
+<input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId">
     <div class="form-group">
         <label asp-for="Name">Name</label>
         <input asp-for="Name" class="form-control" >
