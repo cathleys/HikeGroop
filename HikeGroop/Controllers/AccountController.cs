@@ -10,15 +10,18 @@ namespace HikeGroop.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public AccountController(UserManager<AppUser> userManager)
+        public AccountController(UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager)
         {
-           _userManager = userManager;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Login()
         {
-            var login = new LoginViewModel(); 
+            var login = new LoginViewModel();
             return View(login);//preserving data when user loads page.
         }
 
@@ -27,24 +30,25 @@ namespace HikeGroop.Controllers
         {
             if (!ModelState.IsValid) return View(loginViewModel);
 
-            var user = await _userManager.FindByEmailAsync(loginViewModel.EmailAddress);
+            var userLogin = await _userManager.FindByEmailAsync(loginViewModel.EmailAddress);
 
-            if (user == null)
+            if (userLogin != null)
             {
-                TempData["Error"] = "Invalid username, Please try again"; 
-                return View(loginViewModel);
-            }
+                var password = await _userManager.CheckPasswordAsync(userLogin, loginViewModel.Password);
+                if (password)
+                {
+                    var result = await _signInManager.PasswordSignInAsync(userLogin, loginViewModel.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
 
-            var isPasswordCorrect = await _userManager.CheckPasswordAsync(user, loginViewModel.Password);
-           
-            if(!isPasswordCorrect)
-            {
+                }
                 TempData["Error"] = "Invalid password, Please try again";
                 return View(loginViewModel);
             }
-
-            return RedirectToAction("Index", "Home");
-
+            TempData["Error"] = "User doesn't exist, please try again";
+            return View(loginViewModel);
         }
         public async Task<IActionResult> Register()
         {
@@ -57,7 +61,8 @@ namespace HikeGroop.Controllers
         {
             if (!ModelState.IsValid) return View(registerViewModel);
 
-           if(await UserExists(registerViewModel.Username)){
+            if (await UserExists(registerViewModel.Username))
+            {
 
                 TempData["Error"] = "Username is taken, please try again";
                 return View(registerViewModel);
@@ -71,18 +76,24 @@ namespace HikeGroop.Controllers
             };
 
             var newUserResult = await _userManager.CreateAsync(newUser, registerViewModel.Password);
-           
+
             if (newUserResult.Succeeded)
             {
-            await _userManager.AddToRoleAsync(newUser, UserRoles.Member);
-            return View("Login");
+                await _userManager.AddToRoleAsync(newUser, UserRoles.Member);
+                return View("Login");
             }
             return View(registerViewModel);
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
+        }
 
-        private async Task<bool>UserExists(string username)
+        private async Task<bool> UserExists(string username)
         {
             return await _userManager.Users.AnyAsync(u => u.UserName == username);
         }
