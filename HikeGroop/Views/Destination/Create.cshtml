@@ -3,7 +3,7 @@
 @model CreateDestinationViewModel;
 
 <form method="post" asp-action="Create" enctype="multipart/form-data">
-
+    <input type="hidden" asp-for="AppUserId" name="AppUserId" id="AppUserId">
     <div class="form-group">
         <label asp-for="Title">Title</label>
         <input asp-for="Title" class="form-control"  placeholder="Title">
@@ -61,7 +61,7 @@
         <label asp-for="HikingCategory">Category</label>
         <select asp-for="HikingCategory"
         asp-items="@Html.GetEnumSelectList<HikingCategory>()"
-                class="form-control form-control-lg">
+                class="form-control form-control-md">
         <option>--select--</option>
       </select>
         <span asp-validation-for="HikingCategory" class="text-danger"></span>
@@ -71,17 +71,17 @@
         <label asp-for="HikingTour">Tour Type</label>
         <select asp-for="HikingTour"
                 asp-items="@Html.GetEnumSelectList<HikingTour>()"
-                class="form-control form-control-lg">
+                class="form-control form-control-md">
         <option>--select--</option>
       </select>
         <span asp-validation-for="HikingTour" class="text-danger"></span>
     </div>
 
      <div class="form-group">
-        <label asp-for="TrailClass">Tour Type</label>
+        <label asp-for="TrailClass">Trail Class</label>
         <select asp-for="TrailClass"
                 asp-items="@Html.GetEnumSelectList<TrailClass>()"
-                class="form-control form-control-lg">
+                class="form-control form-control-md">
         <option>--select--</option>
       </select>  
       <span asp-validation-for="TrailClass" class="text-danger"></span>
