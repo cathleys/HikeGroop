@@ -7,16 +7,17 @@ namespace HikeGroop.Extensions
 {
     public static class ApplicationServiceExtensions
     {
-       
+
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services,
             IConfiguration config)
         {
 
-           services.AddScoped<IDestinationRepository, DestinationRepository>();
-           services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IDestinationRepository, DestinationRepository>();
+            services.AddScoped<IGroupRepository, GroupRepository>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IDashboardRepository, DashboardRepository>();
 
             return services;
         }
