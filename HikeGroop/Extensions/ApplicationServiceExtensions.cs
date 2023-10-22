@@ -18,6 +18,7 @@ namespace HikeGroop.Extensions
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IDashboardRepository, DashboardRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

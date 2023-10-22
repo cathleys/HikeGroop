@@ -9,6 +9,8 @@ public class AppUser : IdentityUser
 {
     public HikerType? HikerType { get; set; }
 
+    public string? ProfileImageUrl { get; set; }
+    public string? City { get; set; }
     public int? AddressId { get; set; }
     public Address? Address { get; set; }
 

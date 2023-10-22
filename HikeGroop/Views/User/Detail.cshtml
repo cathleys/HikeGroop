@@ -1,0 +1,43 @@
+@using HikeGroop.ViewModels
+@model UserDetailViewModel
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<link rel="stylesheet" href="~/css/detail.css" asp-append-version="true" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+           
+ 
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-6 p-1" >
+                    
+                    <img src="@Model.ProfileImageUrl" 
+                     style="width: 400px;">
+                    
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-6">
+                    <h4 class="box-title mt-5">Username</h4>
+                    <p>@Model.UserName</p>
+                    
+                    <h4 class="box-title mt-5">Hiker Type</h4>
+                    <p>@Model.HikerType</p>
+                    <h4 class="box-title mt-5">City</h4>
+                    <p>@Model.City</p>
+                    
+                    @* <button class="btn btn-success btn-rounded mr-1">
+                        Join @Model.Name
+                    </button> *@
+    
+
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</div>
