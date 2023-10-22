@@ -1,0 +1,34 @@
+@using HikeGroop.ViewModels
+@using HikeGroop.Data.Enums
+@model EditUserDashboardViewModel
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+
+<form method="post" asp-action="EditUserProfile" enctype="multipart/form-data">
+    <input type="hidden" id="Id" name="Id" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="City">City</label>
+        <input asp-for="City" class="form-control" placeholder="City">
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+   <div class="form-group">
+        <label asp-for="HikerType">Hiker Type</label>
+        <select asp-for="HikerType"
+        asp-items="@Html.GetEnumSelectList<HikerType>()"
+                class="form-control form-control-md">
+        <option>--select--</option>
+      </select>
+        <span asp-validation-for="HikerType" class="text-danger"></span>
+    </div> 
+
+    <div class="form-group">
+        <label asp-for="Image">Profile Image</label>
+        <input asp-for="Image" type="file" class="form-control" placeholder="Image">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
