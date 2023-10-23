@@ -4,39 +4,85 @@
 
 @{
     ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Login.cshtml";
 }
 
+<div class="theme-layout">
 
-<div class="col-md-6 offset-3 text-right">
-    <p>
-        <h4 class="text-center">Log in to your account</h4>
-    </p>
-    @if (TempData["Error"] != null)
-    {
-        <div class="col-md-12 alert alert-danger">
-            <span><b>Sorry!</b> - @TempData["Error"]</span>
-        </div>
-    }
-    <div class="row">
-        <div class="col-md-8 offset-2">
-            <form asp-action="Login">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="authtication bluesh high-opacity">
+       
+        <ul class="welcome-caro">
+            <li class="welcome-box">
 
-                <div class="form-group">
-                    <label asp-for="EmailAddress" class="control-label"></label>
-                    <input asp-for="EmailAddress" class="form-control">
-                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group mt-3">
-                    <input class="btn btn-outline-success float right" type="submit" value="Login" />
-                    <a class="btn btn-outline-secondary" asp-controller="Account" asp-action="Login">Cancel</a>
-                </div>
-            </form>
-        </div>
+                <h4>Find Meetups and community</h4>
+                <p>
+                    Join HikeGroop and meetup with hiker fellows.
+                </p>
+            </li>
+            <li class="welcome-box">
+
+                <h4>Build your own striving hiking community</h4>
+                <p>
+                    You can build your own group and participate in activities
+                </p>
+            </li>
+            <li class="welcome-box">
+
+                <h4>Ready to join hiking activities?</h4>
+                <p>
+                    Participate in hiking activities for all type of hikers
+                </p>
+            </li>
+
+        </ul>
     </div>
+    <div class="auth-login">
+        <div class="logo"><img src="~/assets/images/logo.png" alt=""><span>HikeGroop</span></div>
+        <div class="mockup left-bottom"><img src="~/assets/images/mockup.png" alt=""></div>
+        <div class="verticle-center">
+            <div class="login-form">
+                <h4><i class="icofont-key-hole"></i> Login</h4>
+
+                @if (TempData["Error"] != null)
+                {
+                    <div class="col-md-12 alert alert-danger">
+                        <span><b>Sorry!</b> - @TempData["Error"]</span>
+                    </div>
+                }
+                <form asp-action="Login" method="post" class="c-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                    <div >
+                        <label asp-for="EmailAddress" class="control-label"></label>
+                        <input asp-for="EmailAddress" type="text" >
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+
+                    <div >
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" type="password" >
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <button class="main-btn" type="submit"><i class="icofont-key"></i> Login</button>
+                </form>
+
+                <div>
+                    @* TODO *@
+                    <form asp-controller="DemoAccount"  asp-action="AdminLogin" method="post">
+                        <button class ="btn btn-primary" type="submit">User Admin</button>
+                </form>
+
+                    <form asp-controller="DemoAccount" asp-action="MemberLogin" method="post">
+                    <button class="btn btn-primary" type="submit">User Demo</button>
+                </form>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="mockup right"><img src="~/assets/images/star-shape.png" alt=""></div>
+    </div>
+
 </div>

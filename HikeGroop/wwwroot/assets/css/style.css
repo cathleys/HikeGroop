@@ -1,9 +1,5 @@
 /*
-[Master Stylesheet]
-Project Name: Socimo
-Version:    1.1
-create date: January-2021
-////----- INDEXING -----////
+
 01- General Code
 02- Carousel nav and dot styling
 03- Responsive header
@@ -65,12 +61,12 @@ body {
     padding: 0;
     overflow-x: hidden;
     color: #3e3f5e;
-    font-size: 14px;
+    font-size: 16px;
 	letter-spacing: 0.1px;
 }
 p {
     color: #7d7e9e;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 24px;
     font-family: 'Figtree', sans-serif;
     margin-top: 0;
@@ -289,7 +285,7 @@ section {
     background: rgba(255, 255, 255, .9);
 }
 .bluesh:before {
-    background: #3ca9fc;
+    background: #588658;
 }
 .purple:before {
     background: #9e72fa;
@@ -3174,7 +3170,7 @@ ul.welcome-caro li.welcome-box figure img {
     margin: 10px 0 20px;
 }
 .signup-form > h4 i, .login-form > h4 i {
-    color: #3ca9fc;
+    color: #588658;
 }
 .signup-form .c-form button {
     display: block;
