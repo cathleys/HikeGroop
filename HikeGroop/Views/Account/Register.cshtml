@@ -1,56 +1,96 @@
 ﻿@using HikeGroop.ViewModels
+@using HikeGroop.Data.Enums
 @model RegisterViewModel
 
 
 @{
     ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Register.cshtml";
 }
 
+<div class="page-loader" id="page-loader">
 
-<div class="col-md-6 offset-3 text-right">
-    <p>
-        <h4 class="text-center">Create new account</h4>
-    </p>
-    @if (TempData["Error"] != null)
-    {
-        <div class="col-md-12 alert alert-danger">
-            <span><b>Sorry!</b> - @TempData["Error"]</span>
-        </div>
-    }
-    <div class="row">
-        <div class="col-md-8 offset-2">
-            <form asp-action="Register">
+    <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
 
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+</div><!-- page loader -->
+<div class="theme-layout">
 
-                <div class="form-group">
-                    <label asp-for="Username" class="control-label"></label>
-                    <input asp-for="Username" class="form-control">
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>  
-                
-                <div class="form-group">
-                    <label asp-for="EmailAddress" class="control-label"></label>
-                    <input asp-for="EmailAddress" class="form-control">
-                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div> 
-                
-                <div class="form-group">
-                    <label asp-for="ConfirmPassword" class="control-label"></label>
-                    <input asp-for="ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-                <div class="form-group mt-3">
-                    <input class="btn btn-outline-success float right" type="submit" value="Register" />
-                    <a class="btn btn-outline-secondary" asp-controller="Account" asp-action="Register">Cancel</a>
-                </div>
-            </form>
+    <div class="authtication bluesh high-opacity">
+        <div class="verticle-center">
+            <div class="welcome-note">
+                <div class="logo"><img src="~/assets/images/logo.png" alt=""><span>HikeGroop</span></div>
+                <h1>Welcome to HikeGroop</h1>
+                <p>
+                    Every hiker and enthusiast is welcome to join this platform for free and find awesome groups where they can go to hiking activities together.
+                </p>
+            </div>
+            <div class="bg-image" style="background-image: url(assets/images/resources/hikecomm.png)"></div>
         </div>
     </div>
+    <div class="auth-login">
+        <div class="verticle-center">
+            <div class="signup-form">
+                <h4><i class="icofont-lock"></i> Sign up</h4>
+
+                @if (TempData["Error"] != null)
+                {
+                    <div class="col-md-12 alert alert-danger">
+                        <span><b>Sorry!</b> - @TempData["Error"]</span>
+                    </div>
+                }
+                <form asp-action="Register" method="post" class="c-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row merged-10">
+                        <div class="col-lg-6 col-sm-6 col-md-6">
+                            <label asp-for="Username"></label>
+                            <input asp-for="Username" type="text">
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6 col-md-6">
+                            <label asp-for="EmailAddress"></label>
+                            <input asp-for="EmailAddress" type="text">
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6 col-md-6">
+                            <label asp-for="City"></label>
+                            <input asp-for="City" type="text">
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6 col-md-6">
+                            <label asp-for="HikerType"></label>
+                            <select asp-for="HikerType" class="form-select"
+                                    asp-items="@Html.GetEnumSelectList<HikerType>()">
+                                <option>--select--</option>
+                            </select>
+                            <span asp-validation-for="HikerType" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6 col-md-6">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" type="password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-md-6">
+                            <label asp-for="ConfirmPassword">Confirm Password</label>
+                            <input asp-for="ConfirmPassword" type="password">
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="col-lg-12">
+                            <button class="main-btn" type="submit"><i class="icofont-key"></i> Signup</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
+
