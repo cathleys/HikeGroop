@@ -7,10 +7,16 @@
     Layout = "~/Views/Shared/_Login.cshtml";
 }
 
+<div class="page-loader" id="page-loader">
+
+    <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
+
+</div><!-- page loader -->
+
 <div class="theme-layout">
 
     <div class="authtication bluesh high-opacity">
-       
+
         <ul class="welcome-caro">
             <li class="welcome-box">
 
@@ -42,7 +48,7 @@
         <div class="verticle-center">
             <div class="login-form">
                 <h4><i class="icofont-key-hole"></i> Login</h4>
-
+                
                 @if (TempData["Error"] != null)
                 {
                     <div class="col-md-12 alert alert-danger">
@@ -53,30 +59,36 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
-                    <div >
+                    <div>
                         <label asp-for="EmailAddress" class="control-label"></label>
-                        <input asp-for="EmailAddress" type="text" >
+                        <input asp-for="EmailAddress" type="text">
                         <span asp-validation-for="EmailAddress" class="text-danger"></span>
                     </div>
 
-                    <div >
+                    <div>
                         <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" type="password" >
+                        <input asp-for="Password" type="password">
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
 
-                    <button class="main-btn" type="submit"><i class="icofont-key"></i> Login</button>
+                        <button class="main-btn" type="submit"><i class="icofont-key"></i> Login</button>
+
                 </form>
 
-                <div>
+                <div class="col-auto">
+                    <a type="button"
+                       asp-controller="Account"
+                       asp-action="Register">
+                        Create an Account
+                    </a>
                     @* TODO *@
-                    <form asp-controller="DemoAccount"  asp-action="AdminLogin" method="post">
-                        <button class ="btn btn-primary" type="submit">User Admin</button>
-                </form>
+                    <form asp-controller="DemoAccount" asp-action="AdminLogin" method="post">
+                        <button class="btn btn-primary" type="submit">User Admin</button>
+                    </form>
 
                     <form asp-controller="DemoAccount" asp-action="MemberLogin" method="post">
-                    <button class="btn btn-primary" type="submit">User Demo</button>
-                </form>
+                        <button class="btn btn-primary" type="submit">User Demo</button>
+                    </form>
 
                 </div>
 

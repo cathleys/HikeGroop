@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using HikeGroop.Data.Enums;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
@@ -11,6 +12,13 @@ namespace HikeGroop.ViewModels
         [Required(ErrorMessage="Email address is required")]
         [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
+
+		[Required]
+		[Display(Name = "Hiker Type")]
+		public HikerType HikerType { get; set; }
+        
+        [Required]
+		public string City { get; set; }
         [Required]
         [DataType(DataType.Password)]
        

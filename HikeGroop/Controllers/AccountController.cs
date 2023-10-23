@@ -72,7 +72,9 @@ namespace HikeGroop.Controllers
             var newUser = new AppUser
             {
                 UserName = registerViewModel.Username,
-                Email = registerViewModel.EmailAddress
+                Email = registerViewModel.EmailAddress,
+                HikerType = registerViewModel.HikerType,
+                City = registerViewModel.City
             };
 
             var newUserResult = await _userManager.CreateAsync(newUser, registerViewModel.Password);
