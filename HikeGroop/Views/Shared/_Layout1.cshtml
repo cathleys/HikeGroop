@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>HikeGroop | Online Meetup Platform</title>
+    <link rel="icon" href="~/assets/images/logo.png" type="image/png" sizes="16x16">
+
+    <link rel="stylesheet" href="~/assets/css/main.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/color.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+</head>
+<body>
+  
+    <header class="transparent">
+        <div class="topbar">
+            <div class="logo"><img src="~/assets/images/logo.png" alt=""><span>HikeGroop</span></div>
+            <div class="searches">
+                <form method="post">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit"><i class="icofont-search"></i></button>
+                    <span class="cancel-search"><i class="icofont-close"></i></span>
+                    <div class="recent-search">
+                        <h4 class="recent-searches">Your's Recent Search</h4>
+                        <ul class="so-history">
+                            <li>
+                                <div class="searched-user">
+                                    
+                                    <span>Pasig City</span>
+                                </div>
+                                <span class="trash"><i class="icofont-close-circled"></i></span>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <ul>
+                <li><a asp-area="" asp-controller="Destination" asp-action="Index" title="">Destination</a></li>
+                <li><a asp-area="" asp-controller="Account" asp-action="Login" title="">Login</a></li>
+                <li><a asp-area="" asp-controller="Account" asp-action="Register" title="">Register</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+
+    <footer>
+        <div class="gap">
+            <div class="bg-image" style="background-image: url(assets/images/resources/footer-bg.png)"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="web-info">
+                            <div class="logo"><img src="~/assets/images/logo.png" alt=""><span>HikeGroop</span></div>
+                            <p>Subscribe our newsletter for getting notifications and alerts</p>
+                            <div class="contact-little">
+                                <span><i class="icofont-phone-circle"></i> +1-235-099-34</span>
+                                <span><i class="icofont-email"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7aea9a1a887a6aca2a3aaaea4e9a4a8aa">[email&#160;protected]</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-6">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4>Company</h4>
+                            </div>
+                            <ul class="quick-links">
+                                <li><a href="#" title="">About Us</a></li>
+                                <li><a href="#" title="">Career</a></li>
+                                <li><a href="#" title="">Privacy</a></li>
+                                <li><a href="#" title="">Terms</a></li>
+                                <li><a href="#" title="">FAQ</a></li>
+                                <li><a href="#" title="">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-6">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4>Quick Links</h4>
+                            </div>
+                            <ul class="quick-links">
+                                <li><a href="#" title="">Product</a></li>
+                                <li><a href="#" title="">Market</a></li>
+                                <li><a href="#" title="">Courses</a></li>
+                                <li><a href="#" title="">Services</a></li>
+                                <li><a href="#" title="">Enterprise</a></li>
+                                <li><a href="#" title="">Sitemap</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4>Follow Us</h4>
+                            </div>
+                            <ul class="quick-links">
+                                <li><a href="#" title=""><i class="icofont-facebook"></i>facebook</a></li>
+                                <li><a href="#" title=""><i class="icofont-twitter"></i>twitter</a></li>
+                                <li><a href="#" title=""><i class="icofont-instagram"></i>instagram</a></li>
+                                <li><a href="#" title=""><i class="icofont-google-plus"></i>google +</a></li>
+                                <li><a href="#" title=""><i class="icofont-whatsapp"></i>whatsapp</a></li>
+                                <li><a href="#" title=""><i class="icofont-reddit"></i>reddit</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h4>Newsletter</h4>
+                            </div>
+                            <div class="news-lettr">
+                                <form class="newsletter">
+                                    <input type="text" placeholder="Email Address">
+                                    <button type="submit"><i class="icofont-paper-plane"></i></button>
+                                </form>
+                                <p>
+                                    it is a long established fact that a reader will be distracted by.
+                                </p>
+                                <h5>Download App</h5>
+                                <a href="#" title=""><img src="~/assets/images/android.png" alt=""></a>
+                                <a href="#" title=""><img src="~/assets/images/apple.png" alt=""></a>
+                                <a href="#" title=""><img src="~/assets/images/windows.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer><!-- footer -->
+
+    <script src="~/assets/js/main.min.js"></script>
+    <script src="~/assets/js/counterup.min.js"></script>
+    <script src="~/assets/js/counterup-t-waypoint.js"></script>
+    <script src="~/assets/js/typed.js"></script>
+    <script src="~/assets/js/script.js"></script>
+
+</body>
+</html>
