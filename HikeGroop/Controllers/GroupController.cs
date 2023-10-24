@@ -59,7 +59,7 @@ namespace HikeGroop.Controllers
             return View(groupDetailViewModel);
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             var currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
             var createGroupViewModel = new CreateGroupViewModel { AppUserId = currentUserId };
@@ -88,7 +88,7 @@ namespace HikeGroop.Controllers
 
                 };
                 await _groupRepository.Add(newGroup);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
             else
             {
@@ -197,7 +197,7 @@ namespace HikeGroop.Controllers
             }
 
             await _groupRepository.Delete(group);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }
