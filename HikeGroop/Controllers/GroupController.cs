@@ -43,9 +43,20 @@ namespace HikeGroop.Controllers
 
         public async Task<IActionResult> Detail(int id)
         {
+            var currentUser = _httpContextAccessor.HttpContext?.User.GetUsername();
             var group = await _groupRepository.GetGroupByIdAsync(id);
 
-            return View(group);
+            var groupDetailViewModel = new GroupDetailViewModel
+            {
+                Id = group.Id,
+                Name = group.Name,
+                Description = group.Description,
+                Image = group.Image,
+                AddressId = group.AddressId,
+                Address = group.Address,
+                AppUserName = currentUser,
+            };
+            return View(groupDetailViewModel);
         }
 
         public async Task<IActionResult> Create()

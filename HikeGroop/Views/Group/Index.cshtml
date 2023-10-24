@@ -84,7 +84,11 @@
 						<ul class="dropdown">
 							<li><a href="profile.html" title=""><i class="icofont-user-alt-3"></i> Your Profile</a></li>
 							<li><a class="dark-mod" href="#" title=""><i class="icofont-moon"></i> Dark Mode</a></li>
-							<li class="logout"><a asp-controller="Account" asp-action="Logout"><i class="icofont-power"></i> Logout</a></li>
+							<li class="logout">
+								 <form asp-area="" asp-controller="Account" asp-action="Logout">
+                                 <button class="main-btn2" ><i class="icofont-power"></i> Logout</butt>
+                                </form>
+							</li>
 						</ul>
 				</li>
 			
@@ -117,7 +121,7 @@
 													asp-action="Detail"
 													asp-route-id="@item.Id"
 												>
-													<button class="main-btn" type="submit">join group</button>
+													<button class="main-btn2" type="submit">join group</button>
 												</form>
 											</div>
 										</div>
