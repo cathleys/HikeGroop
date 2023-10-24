@@ -101,7 +101,7 @@ namespace HikeGroop.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-             var currentUser = _httpContextAccessor.HttpContext?.User.GetUsername();
+            var currentUser = _httpContextAccessor.HttpContext?.User.GetUsername();
             var group = await _groupRepository.GetGroupByIdAsync(id);
 
             if (group == null) return View("Error");
@@ -116,7 +116,7 @@ namespace HikeGroop.Controllers
                 Address = new Address
                 {
                     City = group.Address.City
-                    
+
                 }
 
             };
