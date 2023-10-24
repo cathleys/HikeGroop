@@ -82,7 +82,9 @@
 							</i>
 						</a>
 						<ul class="dropdown">
-							<li><a href="profile.html" title=""><i class="icofont-user-alt-3"></i> Your Profile</a></li>
+							<li> <form asp-area="" asp-controller="Dashboard" asp-action="Index">
+                                 <button class="main-btn2" ><i class="icofont-user-alt-3"></i> Your Dashboard</button>
+                                </form></li>
 							<li><a class="dark-mod" href="#" title=""><i class="icofont-moon"></i> Dark Mode</a></li>
 							<li class="logout">
 								 <form asp-area="" asp-controller="Account" asp-action="Logout">
