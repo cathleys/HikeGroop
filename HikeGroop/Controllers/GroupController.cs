@@ -13,18 +13,32 @@ namespace HikeGroop.Controllers
         private readonly IPhotoService _photoService;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
+
         public GroupController(IGroupRepository groupRepository,
-            IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
+            IPhotoService photoService, IHttpContextAccessor httpContextAccessor
+           )
         {
             _groupRepository = groupRepository;
             _photoService = photoService;
             _httpContextAccessor = httpContextAccessor;
+
         }
 
         public async Task<IActionResult> Index()
         {
+
+            var currentUser = _httpContextAccessor.HttpContext?.User.GetUsername();
             var groups = await _groupRepository.GetGroups();
-            return View(groups);
+
+
+            var groupViewModel = new GroupViewModel
+            {
+                Groups = groups,
+                AppUserName = currentUser,
+
+            };
+
+            return View(groupViewModel);
         }
 
         public async Task<IActionResult> Detail(int id)
@@ -36,10 +50,10 @@ namespace HikeGroop.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            var currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
             var createGroupViewModel = new CreateGroupViewModel { AppUserId = currentUserId };
             return View(createGroupViewModel);
-            ;
+
         }
 
         [HttpPost]
