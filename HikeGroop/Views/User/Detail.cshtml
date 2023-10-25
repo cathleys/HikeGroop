@@ -2,42 +2,252 @@
 @model UserDetailViewModel
 
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = "User Profile";
+    Layout = "~/Views/Shared/_Users.cshtml";
 }
-
-<link rel="stylesheet" href="~/css/detail.css" asp-append-version="true" />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-
+@*
 <div class="container">
-    <div class="card">
-        <div class="card-body">
-           
- 
-            <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-6 p-1" >
-                    
-                    <img src="@Model.ProfileImageUrl" 
-                     style="width: 400px;">
-                    
-                </div>
-                <div class="col-lg-7 col-md-7 col-sm-6">
-                    <h4 class="box-title mt-5">Username</h4>
-                    <p>@Model.UserName</p>
-                    
-                    <h4 class="box-title mt-5">Hiker Type</h4>
-                    <p>@Model.HikerType</p>
-                    <h4 class="box-title mt-5">City</h4>
-                    <p>@Model.City</p>
-                    
-                    @* <button class="btn btn-success btn-rounded mr-1">
-                        Join @Model.Name
-                    </button> *@
-    
+<div class="card">
+<div class="card-body">
 
-                </div>
-            
-            </div>
-        </div>
-    </div>
+
+<div class="row">
+<div class="col-lg-5 col-md-5 col-sm-6 p-1" >
+
+<img src="@Model.ProfileImageUrl"
+style="width: 400px;">
+
 </div>
+<div class="col-lg-7 col-md-7 col-sm-6">
+<h4 class="box-title mt-5">Username</h4>
+<p>@Model.UserName</p>
+
+<h4 class="box-title mt-5">Hiker Type</h4>
+<p>@Model.HikerType</p>
+<h4 class="box-title mt-5">City</h4>
+<p>@Model.City</p>
+
+<button class="btn btn-success btn-rounded mr-1">
+Join @Model.Name
+</button>
+
+</div>
+
+</div>
+</div>
+</div>
+</div> *@
+
+
+
+<section>
+		<div class="gap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="page-contents" class="row merged20">
+							<div class="col-lg-3">
+								<aside class="sidebar static left">
+									<div class="widget">
+										<span><i class="icofont-globe"></i> Sponsored</span>
+										<ul class="sponsors-ad">
+											<li>
+												<figure><img alt="" src="~/assets/images/resources/sponsor.jpg"></figure>
+												<div class="sponsor-meta">
+													<h5><a title="" href="#">IQ Options Broker</a></h5>
+													<a target="_blank" title="" href="#">www.iqvie.com</a>
+												</div>
+											</li>
+											<li>
+												<figure><img alt="" src="~/assets/images//resources/sponsor2.jpg"></figure>
+												<div class="sponsor-meta">
+													<h5><a title="" href="#">BM Fashion Designer</a></h5>
+													<a target="_blank" title="" href="#">www.abcd.com</a>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="widget">
+										<h4 class="widget-title">Your Groups</h4>
+										<ul class="ak-groups">
+											<li>
+												<figure><img alt="" src="~/assets/images/resources/your-group1.jpg"></figure>
+												<div class="your-grp">
+													<h5><a title="" href="#">Good Group</a></h5>
+													<a title="" href="#"><i class="icofont-bell-alt"></i>Notifilactions <span>13</span></a>
+													<a class="promote" title="" href="#">view feed</a>
+												</div>
+											</li>
+											<li>
+												<figure><img alt="" src="~/assets/images/resources/your-group2.jpg"></figure>
+												<div class="your-grp">
+													<h5><a title="" href="#">E-course Group</a></h5>
+													<a title="" href="#"><i class="icofont-bell-alt"></i>Notifilactions <span>13</span></a>
+													<a class="promote" title="" href="#">view feed</a>
+												</div>
+											</li>
+										</ul>
+									</div>
+
+									<div class="widget">
+										<h4 class="widget-title">Group Terms</h4>
+										<div class="grop-rules">
+											<p>
+												Hi! To ensure that this is a great place for everyone to have a wondefull time, we have some rules. Breaking them will result in a ban from the group.
+											</p>
+											<ol>
+												<li><i class="icofont-dotted-right"></i> Be positive! Respect and help other viewers</li>
+												<li><i class="icofont-dotted-right"></i> No insults, aggravations or any other bad languag</li>
+												<li><i class="icofont-dotted-right"></i> No self promotions</li>
+												<li><i class="icofont-dotted-right"></i> Avoid political or religious discussions</li>
+												<li><i class="icofont-dotted-right"></i> No comment spamming</li>
+											</ol>
+										</div>
+									</div>
+									
+								</aside>
+							</div>
+							<div class="col-lg-9">
+								<div class="group-feed">
+									<div class="group-avatar">
+										<img src="~/assets/images/resources/profile-banner.jpg" alt="">
+										<a href="#" title=""><i class="icofont-check-circled"></i>Follow</a>
+										<figure class="group-dp"><img src="@Model.ProfileImageUrl" alt=""></figure>
+									</div>
+									<div class="grp-info about">
+										<h4>@Model.UserName <span>@Model.UserName</span></h4>
+										<ul class="joined-info">
+											<li><span>Joined:</span> April 2020</li>
+											<li><span>Follow:</span> 55K</li>
+											<li><span>Followers:</span> 2.2K</li>
+											
+										</ul>
+										<ul class="nav nav-tabs about-btn">
+											<li class="nav-item"><a class="active" href="#posts" data-toggle="tab">Posts</a></li>
+											<li class="nav-item"><a class="" href="#about" data-toggle="tab">About</a></li>
+										</ul>
+										<ul class="more-grp-info">
+											<li>
+												<form class="c-form" method="post">
+													<input type="text" placeholder="Search...">
+													<i class="icofont-search-1"></i>
+												</form>
+											</li>
+											
+										</ul>
+									</div>
+									<div class="main-wraper">
+										<div class="grp-about">
+											<div class="row">
+												<div class="col-lg-8 col-md-6">
+													<h4>About Me!</h4>
+													<p>@Model.HikerType</p>
+													<ul class="badges">
+														<li><img src="~/assets/images/badges/badge2.png" alt=""></li>
+														<li><img src="~/assets/images/badges/badge3.png" alt=""></li>
+														<li><img src="~/assets/images/badges/badge4.png" alt=""></li>
+														<li><img src="~/assets/images/badges/badge5.png" alt=""></li>
+														<li><img src="~/assets/images/badges/badge7.png" alt=""></li>
+														<li><img src="~/assets/images/badges/badge8.png" alt=""></li>
+													</ul>
+												</div>
+											
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="tab-content">
+												<div class="tab-pane active fade show " id="posts">
+													<div class="row merged20">
+														<div class="col-lg-8">
+															<div class="main-wraper">
+																<span class="new-title">Create New Post</span>
+																<div class="new-post">
+																	<form method="post">
+																		<i class="icofont-pen-alt-1"></i>
+																		<input type="text" placeholder="Create New Post">
+																	</form>
+																	<ul class="upload-media">
+																		<li>
+																			<a href="#" title="">
+																				<i><img src="~/assets/images/image.png" alt=""></i>
+																				<span>Photo/Video</span>
+																			</a>	
+																		</li>
+																		<li>
+																			<a href="#" title="">
+																				<i><img src="~/assets/images/activity.png" alt=""></i>
+																				<span>Feeling/Activity</span>
+																			</a>	
+																		</li>
+																		<li>
+																			<a href="live-stream.html" title="">
+																				<i><img src="~/assets/images/live-stream.png" alt=""></i>
+																				<span>Live Stream</span>
+																			</a>	
+																		</li>
+																	</ul>
+																</div>
+															</div><!-- create new post -->
+
+															</aside>
+														</div>
+													</div>
+												</div>
+												
+												
+												<div class="tab-pane fade" id="about">
+													<div class="row merged20">
+														<div class="col-lg-8">
+															<div class="main-wraper">
+																<h5 class="main-title">Personal</h5>
+																<div class="info-block-list">
+																	<ul>
+																		<li>Hiker Type: <span>@Model.HikerType</span></li>
+																		<li>Location: <span>@Model.City</span></li>
+																		<li>Web: <span>www.akosi.com</span></li>
+																		
+																	</ul>	
+																</div>	
+															</div>
+														
+														</div>
+														<div class="col-lg-4">
+															<aside class="sidebar">
+																<div class="widget">
+																	<h4 class="widget-title">Complete Your Profile</h4>
+																	<span>Complete your profile by filling profile info fields, completing quests &amp; unlocking badges</span>
+																	<div data-progress="tip" class="progress__outer" data-value="0.67"><canvas width="80" height="80"></canvas>
+																		<div class="progress__inner">73%</div>
+																	</div>
+																	<ul class="prof-complete">
+																		<li><i class="icofont-plus-square"></i> <a href="#" title="">Upload Your Picture</a><em>10%</em></li>
+																		<li><i class="icofont-plus-square"></i> <a href="#" title="">Your University?</a><em>20%</em></li>
+																		<li><i class="icofont-plus-square"></i> <a href="#" title="">Invite to 10+ members</a><em>20%</em></li>
+																	</ul>
+																</div><!-- complete profile widget -->
+																<div class="widget">
+																	<h4 class="widget-title">User stats</h4>
+																	<ul class="user-stat">
+																		<li><i class="icofont-lollipop"></i><span>Last Post <em>2 hours ago</em></span></li>
+																		<li><i class="icofont-spotify"></i><span>Last comment <em>6 hours ago</em></span></li>
+																		<li><i class="icofont-like"></i><span>Most Liked Post<em>540 Likes</em></span></li>
+																		<li><i class="icofont-user-alt-4"></i><span>Last Friend Added <em>2 days ago</em></span></li>
+																	</ul>
+																</div><!-- complete profile widget -->
+															</aside>	
+														</div>
+													</div>	
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
