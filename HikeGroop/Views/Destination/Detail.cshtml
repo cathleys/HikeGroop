@@ -1,51 +1,98 @@
-﻿@model Destination
+﻿@using HikeGroop.Data
+@model Destination
 
 @{
-    ViewData["Title"] = "Destination";
+    ViewData["Title"] = "Detail Destination";
+    Layout = "~/Views/Shared/_DestinationForms.cshtml";
+
 }
 
-<link rel="stylesheet" href="~/css/detail.css" asp-append-version="true" />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title p-2">@Model.Title</h3>
- 
+<section>
+    <div class="gap">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-6 p-1" >
-                    
-                    <img src="@Model.Image" 
-                     style="width: 400px;">
-                    
+                <div class="col-lg-12">
+                    <div id="page-contents" class="row merged20">
+                        <div class="col-lg-9">
+                            <div class="main-wraper">
+                                <h4 class="main-title">@Model.Title</h4>
+                                <figure class="event-detail-img"><img src="@Model.Image" alt="image photo">
+                                </figure>
+                                <div class="event-schedule">
+                                    <h6>schedule</h6>
+                                    <span>Next date of your event</span>
+                                    <h5><i class="">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-calendar">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                                            </svg></i> Friday, July 15, 2024 at <b>3:45PM</b> GMT+5:30</h5>
+
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole(UserRoles.Admin))
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", "Destination", new { id = Model.Id })
+
+                                    }
+
+                                </div>
+                                <div class="event-desc">
+                                    <h6>Event Description</h6>
+                                    <p>
+                                        @Model.Description
+                                    </p>
+
+                                    <h6>Event Website</h6>
+                                    <em><a href="#" title="">https://hikingforhikers.ph/event</a></em>
+                                </div>
+                                <div class="event-loc">
+                                    <h6>Hiking itinerary</h6>
+                                    <span><i class="icofont-map-pins"></i> @Model.Itinerary.Location</span>
+                                    <ul class="list-unstyled">
+                                        <li><strong>MeetUp: </strong>@Model.Itinerary.MeetUp</li>
+                                        <li><strong>Jump Off Point: </strong>@Model.Itinerary.JumpOffPoint</li>
+                                        <li><strong>Location: </strong>@Model.Itinerary.Location</li>
+                                        <li><strong>Elevation: </strong>@Model.Itinerary.Elevation</li>
+                                        <li><strong>Days Required: </strong>@Model.Itinerary.DaysRequired</li>
+                                        <li><strong>Hours To Summit: </strong>@Model.Itinerary.HoursToSummit</li>
+                                        <li><strong>Hiking Tour: </strong>@Model.HikingTour</li>
+                                        <li><strong>HikingCategory: </strong>@Model.HikingCategory</li>
+                                        <li><strong>Difficulty: </strong>@Model.TrailClass</li>
+
+                                    </ul>
+                                    @* TODO *@
+                                    <strong>365 people have reached to join this event.</strong>
+                                    <a href="#" title="" class="main-btn">Join Now <i
+                                            class="icofont-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <aside class="sidebar static right">
+                                <div class="widget">
+                                    <h4 class="widget-title">Event Statistics</h4>
+                                    <span>take a quick look how's your event going</span>
+                                    <div class="statics-event">
+                                        <ol>
+                                            <li><span>125</span><i>Hikers</i></li>
+                                            <li><span>536</span><i>Registered</i></li>
+                                            <li><span>478</span><i>Attendance</i></li>
+                                        </ol>
+                                        <div data-progress="tip" class="progress__outer" data-value="0.67">
+                                            <div class="progress__inner">82%</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </aside>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-7 col-md-7 col-sm-6">
-                    <h4 class="box-title mt-5">Description</h4>
-                    <p>@Model.Description</p>
-                    
-                    <h4 class="box-title mt-5">Itineray</h4>
-                    <ul class="list-unstyled">
-                        <li><strong>MeetUp: </strong>@Model.Itinerary.MeetUp</li>
-                        <li><strong>Jump Off Point: </strong>@Model.Itinerary.JumpOffPoint</li>
-                        <li><strong>Location: </strong>@Model.Itinerary.Location</li>
-                        <li><strong>Elevation: </strong>@Model.Itinerary.Elevation</li>
-                        <li><strong>Days Required: </strong>@Model.Itinerary.DaysRequired</li>
-                        <li><strong>Hours to Summit: </strong>@Model.Itinerary.HoursToSummit</li>
-                    </ul>
-                    
-                    <button class="btn btn-success btn-rounded mr-1">
-                        Join Activity
-                    </button>
-    
-                    <h3 class="box-title mt-5">Information</h3>
-                    <ul class="list-unstyled">
-                        <li><i class="fa fa-check text-success"></i>@Model.HikingTour</li>
-                        <li><i class="fa fa-check text-success"></i>@Model.HikingCategory</li>
-                        <li><i class="fa fa-check text-success"></i>@Model.TrailClass</li>
-                    </ul>
-                </div>
-            
             </div>
         </div>
     </div>
-</div>
+</section>
