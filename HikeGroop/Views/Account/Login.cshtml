@@ -75,19 +75,15 @@
 
                 </form>
 
-                <div class="col-auto">
-                    <a type="button"
-                       asp-controller="Account"
-                       asp-action="Register">
-                        Create an Account
-                    </a>
+                <div class="col-auto mt-3">
+                    
                     @* TODO *@
                     <form asp-controller="DemoAccount" asp-action="AdminLogin" method="post">
-                        <button class="btn btn-primary" type="submit">User Admin</button>
+                        <button class="btn btn-success" type="submit">User Admin</button>
                     </form>
-
+                   
                     <form asp-controller="DemoAccount" asp-action="MemberLogin" method="post">
-                        <button class="btn btn-primary" type="submit">User Demo</button>
+                        <button class="btn btn-info" type="submit">User Demo</button>
                     </form>
 
                 </div>

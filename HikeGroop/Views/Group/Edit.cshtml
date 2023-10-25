@@ -79,16 +79,19 @@
 							</i>
 						</a>
 						<ul class="dropdown">
-							<li>
-                                 <form asp-area="" asp-controller="Dashboard" asp-action="Index">
-                                 <button class="main-btn2" ><i class="icofont-user-alt-3"></i> Your Dashboard</button>
-                                </form>
-                            </li>
-							<li><a class="dark-mod" href="#" title=""><i class="icofont-moon"></i> Dark Mode</a></li>
+							<li><a href="@Url.Action("Index","Dashboard")" title=""><i class="icofont-user-alt-3"></i> Your Dashboard</a>
+							</li>
+							<li><a href="@Url.Action("Index","Group")" title=""><i class="icofont-people"></i> Groups</a>
+							</li>
+							<li><a href="@Url.Action("Index","Destination")" title=""><i class="icofont-hill"></i> Destination</a>
+							</li>
+							<li><a href="@Url.Action("Index","User")" title=""><i class="icofont-users-social"></i> Hikers</a>
+							</li>
+							<li><a class="dark-mod" href="#"><i class="icofont-moon"></i> Dark Mode</a></li>
 							<li class="logout">
-								 <form asp-area="" asp-controller="Account" asp-action="Logout">
-                                 <button class="main-btn2"><i class="icofont-power"></i> Logout</butt>
-                                </form>
+								<form asp-controller="Account" asp-action="Logout">
+									<button class="main-btn2"><i class="icofont-power"></i> Logout</button>
+								</form>
 							</li>
 						</ul>
 				</li>

@@ -2,11 +2,211 @@
 @model IEnumerable<Destination>
 @{
     ViewData["Title"] = "Destinations";
+    Layout = "~/Views/Shared/_DestinationIndex.cshtml";
 }
 
-<h1>Destinations</h1>
+<div class="theme-layout">
 
-<div class="album py-5 bg-body-tertiary">
+	<div class="responsive-header">
+		<div class="logo res"><img src="~/assets/images/logo.png" alt=""><span>hikeGroop</span></div>
+		<div class="user-avatar mobile">
+			<a href="profile.html" title="View Profile"><img alt="" src="~/assets/images/resources/user.jpg"></a>
+			<div class="name">
+				<h4>Danial Cardos</h4>
+				<span>Ontario, Canada</span>
+			</div>
+		</div>
+		<div class="right-compact">
+			<div class="sidemenu">
+				<i>
+<svg id="side-menu2" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
+			</div>
+			<div class="res-search">
+				<span>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+			</div>
+			
+		</div>
+		<div class="restop-search">
+			<span class="hide-search"><i class="icofont-close-circled"></i></span>
+			<form method="post">
+				<input type="text" placeholder="Search...">
+			</form>
+		</div>
+	</div><!-- responsive header -->
+	
+	<header class="">
+		<div class="topbar stick">
+			<div class="logo"><img src="~/assets/images/logo.png" alt=""><span>HikeGroop</span></div>
+
+			<ul class="web-elements">
+               <li>
+						<a href="#" title="">
+							<i>
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+							</i>
+						</a>
+						<ul class="dropdown">
+							<li><a href="@Url.Action("Index","Dashboard")" title=""><i class="icofont-user-alt-3"></i> Your Dashboard</a>
+							</li>
+							<li><a href="@Url.Action("Index","Group")" title=""><i class="icofont-people"></i> Groups</a>
+							</li>
+							<li><a href="@Url.Action("Index","Destination")" title=""><i class="icofont-hill"></i> Destination</a>
+							</li>
+							<li><a href="@Url.Action("Index","User")" title=""><i class="icofont-users-social"></i> Hikers</a>
+							</li>
+							<li><a class="dark-mod" href="#"><i class="icofont-moon"></i> Dark Mode</a></li>
+							<li class="logout">
+								<form asp-controller="Account" asp-action="Logout">
+									<button class="main-btn2"><i class="icofont-power"></i> Logout</button>
+								</form>
+							</li>		
+						</ul>
+				</li>
+			</ul>
+		</div>
+	</header><!-- header -->
+	
+
+
+	<section>
+		<div class="gap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="page-contents" class="row merged20">
+							<div class="col-lg-3">
+								<aside class="sidebar static right">
+									<div class="widget">
+										<h4 class="widget-title">Popular Blog</h4>
+										<div class="popular-book">
+											<figure><img src="~/assets/images/resources/book10.jpg" alt=""></figure>
+											<div class="book-about">
+												<h6><a href="#" title="">Blog post title</a></h6>
+												<span></span>
+												<a href="#" title=""><i class="icofont-book-mark"></i></a>
+											</div>
+										</div>
+										<div class="popular-book">
+											<figure><img src="~/assets/images/resources/book9.jpg" alt=""></figure>
+											<div class="book-about">
+												<h6><a href="#" title="">Css3 for Bigners</a></h6>
+												<span>Richard Ali</span>
+												<a href="#" title=""><i class="icofont-book-mark"></i></a>
+											</div>
+										</div>
+										<div class="popular-book">
+											<figure><img src="~/assets/images/resources/book5.jpg" alt=""></figure>
+											<div class="book-about">
+												<h6><a href="#" title="">Technology Wants 2020</a></h6>
+												<span>Richard Ali</span>
+												<a href="#" title=""><i class="icofont-book-mark"></i></a>
+											</div>
+										</div>
+									</div>
+
+								</aside>
+							</div>
+							<div class="col-lg-9">
+								<ul class="nav nav-tabs about-btn mb-4">
+									<li class="nav-item"><a class="active" href="#posts" data-toggle="tab">All</a></li>
+									<li class="nav-item"><a class="" href="#pictures" data-toggle="tab">Day Hike</a></li>
+									<li class="nav-item"><a class="" href="#pictures" data-toggle="tab">Multi Day Hike</a></li>
+									<li class="nav-item"><a class="" href="#videos" data-toggle="tab">Beginner</a></li>
+									<li class="nav-item"><a class="" href="#videos" data-toggle="tab">Intermediate</a></li>
+									<li class="nav-item"><a class="" href="#videos" data-toggle="tab">Advance</a></li>
+			
+								</ul>
+							
+								<div class="main-wraper">
+									<div class="main-title">Hiking activities you may want to join</div>
+									<div class="row">
+                                         @foreach(var item in Model)
+                                         {
+										<div class="col-lg-4 col-md-4 col-sm-6">
+											<div class="event-post mb-3">
+												<figure><a href="event-detail.html" ><img src="@item.Image" alt=""></a></figure>
+												<div class="event-meta">
+													<span>Book Schedule</span>
+													<h6><a href="event-detail.html">@item.Title</a></h6>
+													<p>@item.Description</p>
+													<a class="classic-btn" href="#">Interested</a>
+													<div class="more">
+														<div class="more-post-optns">
+															<i class="">
+	<svg class="feather feather-more-horizontal" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><circle r="1" cy="12" cx="12"/><circle r="1" cy="12" cx="19"/><circle r="1" cy="12" cx="5"/></svg></i>
+															
+                                                            <ul>
+                                                                <li >
+                                                                <a  asp-controller="Destination"
+                                                                    asp-action="Detail"
+                                                                    asp-route-id="@item.Id">
+                                                                       
+																	<i class="icofont-ui-text-chat"></i>View Details
+                                                                </a>
+																	<span>View this destination details</span>
+																</li>
+                                                            @if(User.Identity.IsAuthenticated && User.IsInRole(UserRoles.Admin))
+                                                            {
+																<li>
+																	<a asp-controller="Destination"
+																		asp-action="Edit"
+																		asp-route-id="@item.Id"
+																	>
+
+																	<i class="icofont-share-alt"></i>Edit Information
+																	</a>
+																	<span>Edit this destination</span>
+																</li>
+
+																<li>
+																	<a asp-controller="Destination"
+																		asp-action="Delete"
+																		asp-route-id="@item.Id"
+																	>
+																	<i class="icofont-ui-delete"></i>Delete Post
+																	</a>
+																	<span>If inappropriate Post By Mistake</span>
+																</li>
+																
+                                                            }
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+                                         }
+								
+									</div>
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<figure class="bottom-mockup"><img src="~/assets/images/footer.png" alt=""></figure>
+	<div class="bottombar">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="">&copy; @DateTime.Now.Year HikeGroop</span>
+				</div>
+			</div>
+		</div>
+	</div><!-- bottombar -->
+
+	
+</div>
+
+
+
+
+@* <div class="album py-5 bg-body-tertiary">
     <div class="container">
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -52,4 +252,4 @@
         </div>
           
     </div>
-</div>
+</div> *@

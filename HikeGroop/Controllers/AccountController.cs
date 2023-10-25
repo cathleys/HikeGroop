@@ -40,7 +40,7 @@ namespace HikeGroop.Controllers
                     var result = await _signInManager.PasswordSignInAsync(userLogin, loginViewModel.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Group");
                     }
 
                 }
