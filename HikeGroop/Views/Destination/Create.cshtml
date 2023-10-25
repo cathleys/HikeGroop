@@ -2,99 +2,172 @@
 @using HikeGroop.ViewModels;
 @model CreateDestinationViewModel;
 
-<form method="post" asp-action="Create" enctype="multipart/form-data">
-    <input type="hidden" asp-for="AppUserId" name="AppUserId" id="AppUserId">
-    <div class="form-group">
-        <label asp-for="Title">Title</label>
-        <input asp-for="Title" class="form-control"  placeholder="Title">
-        <span asp-validation-for="Title" class="text-danger"></span>
+@{
+    ViewData["Title"] = "Create Destination";
+    Layout = "~/Views/Shared/_DestinationForms.cshtml";
 
+}
+
+
+
+<section>
+    <div class="gap no-gap bluesh high-opacity">
+        <div style="background-image: url(~/assets/images/resources/top-bg.jpg)" class="bg-image"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="post-subject">
+                        <h1>Destination Form</h1>
+                        <p> Create new Destination here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
 
-    <div class="form-group">
-        <label asp-for="Description">Description</label>
-        <textarea asp-for="Description" class="form-control" placeholder="Description"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
+<section>
+    <div class="gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 mb-4">
+                    <nav class="responsive-tab">
+                        <ul class="nav nav-tabs uk-list">
+                            <li class="nav-item"><a class="active" href="#account" data-toggle="tab">Destination
+                                    form</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-9">
+                    <div class="main-wraper">
+                        <div class="tab-content">
+                            <!-- settings -->
+                            <div class="tab-pane active fade show">
+                                <div class="uk-width">
+                                    <div class="setting-card">
+                                        <h2>Destination Settings</h2>
+                                        <p class="mb-4">This is your Destination public presence on HikeGroop.
+                                        </p>
+                                        <h6>Basic Profile</h6>
+                                        <p>Create information about your Groop</p>
+                                        <form method="post" asp-action="Create" enctype="multipart/form-data">
+                                            <input type="hidden" asp-for="AppUserId" name="AppUserId" id="AppUserId">
+                                            <fieldset class="row merged-10">
+                                                <div class="mb-4 col-lg-12">
+                                                    <label asp-for="Title">Title</label>
+                                                    <input asp-for="Title" class="uk-input">
+                                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                                </div>
+
+                                                <div class="mb-4 col-lg-12">
+                                                    <label asp-for="Description">Description</label>
+                                                    <textarea row="4" asp-for="Description" class="uk-input"></textarea>
+                                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                                </div>
+
+                                                <div>
+                                                    <h3>Itinerary</h3>
+                                                </div>
+
+
+                                                <div class="mb-4 col-lg-12">
+                                                    <label asp-for="Itinerary.MeetUp">Meet Up</label>
+                                                    <input asp-for="Itinerary.MeetUp" class="uk-input" />
+                                                    <span asp-validation-for="Itinerary.MeetUp"
+                                                        class="text-danger"></span>
+                                                </div>
+
+                                                <div class="mb-4 col-lg-6">
+                                                    <label asp-for="Itinerary.JumpOffPoint">Jump Off Point</label>
+                                                    <input asp-for="Itinerary.JumpOffPoint" class="uk-input" />
+                                                    <span asp-validation-for="Itinerary.JumpOffPoint"
+                                                        class="text-danger"></span>
+                                                </div>
+
+
+
+                                                <div class="mb-4 col-lg-12">
+                                                    <label asp-for="Itinerary.Location">Location</label>
+                                                    <input asp-for="Itinerary.Location" class="uk-input" />
+                                                    <span asp-validation-for="Itinerary.Location"
+                                                        class="text-danger"></span>
+                                                </div>
+
+                                                <div class="mb-4 col-lg-6">
+                                                    <label asp-for="Itinerary.MeetUp">Elevation</label>
+                                                    <input asp-for="Itinerary.Elevation" class="uk-input" />
+                                                    <span asp-validation-for="Itinerary.Elevation"
+                                                        class="text-danger"></span>
+                                                </div>
+
+                                                <div class="mb-4 col-lg-6">
+                                                    <label asp-for="Itinerary.MeetUp">Days Required</label>
+                                                    <input asp-for="Itinerary.DaysRequired" class="uk-input"
+                                                        type="number" />
+                                                    <span asp-validation-for="Itinerary.DaysRequired"
+                                                        class="text-danger"></span>
+                                                </div>
+
+
+                                                <div class="mb-4 col-lg-12">
+                                                    <label asp-for="Itinerary.MeetUp">Hours To Summit</label>
+                                                    <input asp-for="Itinerary.HoursToSummit" class="uk-input"
+                                                        type="number" />
+                                                    <span asp-validation-for="Itinerary.HoursToSummit"
+                                                        class="text-danger"></span>
+                                                </div>
+
+                                                <div class="mb-4 col-lg-12">
+                                                    <label asp-for="HikingCategory">Category</label>
+                                                    <select asp-for="HikingCategory"
+                                                        asp-items="@Html.GetEnumSelectList<HikingCategory>()"
+                                                        class="uk-input">
+                                                        <option>--select--</option>
+                                                    </select>
+                                                    <span asp-validation-for="HikingCategory"
+                                                        class="text-danger"></span>
+                                                </div>
+
+                                                <div class="mb-4 col-lg-12">
+                                                    <label asp-for="HikingTour">Tour Type</label>
+                                                    <select asp-for="HikingTour" class="uk-input"
+                                                        asp-items="@Html.GetEnumSelectList<HikingTour>()">
+                                                        <option>--select--</option>
+                                                    </select>
+                                                    <span asp-validation-for="HikingTour" class="text-danger"></span>
+
+                                                </div>
+
+                                                <div class="mb-4 col-lg-12">
+                                                    <label asp-for="HikingTour">Trail Class</label>
+                                                    <select asp-for="TrailClass" class="uk-input"
+                                                        asp-items="@Html.GetEnumSelectList<TrailClass>()">
+                                                        <option>--select--</option>
+                                                    </select>
+                                                    <span asp-validation-for="TrailClass" class="text-danger"></span>
+                                                </div>
+
+
+                                                <div class="mb-4 col-lg-12">
+                                                    <label asp-for="Image">Image</label>
+                                                    <input asp-for="Image" type="file" class="uk-input"
+                                                        placeholder="Image">
+                                                    <span asp-validation-for="Image" class="text-danger"></span>
+                                                </div>
+
+                                                <div class="mb-0 col-lg-12">
+                                                    <button type="submit" class="button primary circle">Create</button>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Notification -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-        <br />
-         <h6>Itinerary</h6>
-        <br />
-
-    <div class="form-group">
-        <label asp-for="Itinerary.MeetUp"></label>
-        <input asp-for="Itinerary.MeetUp" class="form-control" placeholder="Meet Up"/>
-        <span asp-validation-for="Itinerary.MeetUp" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Itinerary.JumpOffPoint"></label>
-        <input asp-for="Itinerary.JumpOffPoint" class="form-control" placeholder="Jump Off Point" />
-        <span asp-validation-for="Itinerary.JumpOffPoint" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Itinerary.Location"></label>
-        <input asp-for="Itinerary.Location" class="form-control" placeholder="Location" />
-        <span asp-validation-for="Itinerary.Location" class="text-danger"></span>
-    </div>
-
-     <div class="form-group">
-        <label asp-for="Itinerary.Elevation"></label>
-         <input asp-for="Itinerary.Elevation" class="form-control" placeholder="Elevation" />
-        <span asp-validation-for="Itinerary.Elevation" class="text-danger"></span>
-
-    </div>
-    <div class="form-group">
-        <label asp-for="Itinerary.DaysRequired"></label>
-       <input asp-for="Itinerary.DaysRequired" class="form-control" type="number" placeholder="Days Required" />
-        <span asp-validation-for="Itinerary.DaysRequired" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Itinerary.HoursToSummit"></label>
-        <input asp-for="Itinerary.HoursToSummit" class="form-control" type="number" placeholder="Hours To Summit" />
-        <span asp-validation-for="Itinerary.HoursToSummit" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="HikingCategory">Category</label>
-        <select asp-for="HikingCategory"
-        asp-items="@Html.GetEnumSelectList<HikingCategory>()"
-                class="form-control form-control-md">
-        <option>--select--</option>
-      </select>
-        <span asp-validation-for="HikingCategory" class="text-danger"></span>
-    </div> 
-
-    <div class="form-group">
-        <label asp-for="HikingTour">Tour Type</label>
-        <select asp-for="HikingTour"
-                asp-items="@Html.GetEnumSelectList<HikingTour>()"
-                class="form-control form-control-md">
-        <option>--select--</option>
-      </select>
-        <span asp-validation-for="HikingTour" class="text-danger"></span>
-    </div>
-
-     <div class="form-group">
-        <label asp-for="TrailClass">Trail Class</label>
-        <select asp-for="TrailClass"
-                asp-items="@Html.GetEnumSelectList<TrailClass>()"
-                class="form-control form-control-md">
-        <option>--select--</option>
-      </select>  
-      <span asp-validation-for="TrailClass" class="text-danger"></span>
-    </div>
-
-
-    <div class="form-group">
-        <label asp-for="Image">Image</label>
-        <input asp-for="Image" type="file" class="form-control" placeholder="Image">
-        <span asp-validation-for="Image" class="text-danger"></span>
-    
-    </div>
-   
-    <br/>
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
+</section>
