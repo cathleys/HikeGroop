@@ -49,6 +49,7 @@ namespace HikeGroop.Controllers
             var editUserDashboardViewModel = new EditUserDashboardViewModel
             {
                 Id = user.Id,
+                Username = user.UserName,
                 ProfileImageUrl = user.ProfileImageUrl,
                 City = user.City,
 
@@ -104,6 +105,7 @@ namespace HikeGroop.Controllers
         ImageUploadResult imageUploadResult)
         {
             user.Id = editVM.Id;
+            user.UserName = editVM.Username;
             user.City = editVM.City;
             user.HikerType = editVM.HikerType;
             user.ProfileImageUrl = imageUploadResult.SecureUrl.AbsoluteUri;
