@@ -9,7 +9,10 @@
 
 <div class="page-loader" id="page-loader">
 
-    <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
+    <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span
+            class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span
+            class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span
+            class="loader-item"></span><span class="loader-item"></span></div>
 
 </div><!-- page loader -->
 
@@ -48,7 +51,7 @@
         <div class="verticle-center">
             <div class="login-form">
                 <h4><i class="icofont-key-hole"></i> Login</h4>
-                
+
                 @if (TempData["Error"] != null)
                 {
                     <div class="col-md-12 alert alert-danger">
@@ -71,19 +74,19 @@
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
 
-                        <button class="main-btn" type="submit"><i class="icofont-key"></i> Login</button>
+                    <button class="main-btn" type="submit"><i class="icofont-key"></i> Login</button>
 
                 </form>
 
                 <div class="col-auto mt-3">
-                    
+
                     @* TODO *@
                     <form asp-controller="DemoAccount" asp-action="AdminLogin" method="post">
-                        <button class="btn btn-success" type="submit">User Admin</button>
+                        <button class="button dark" type="submit">User Admin</button>
                     </form>
-                   
+
                     <form asp-controller="DemoAccount" asp-action="MemberLogin" method="post">
-                        <button class="btn btn-info" type="submit">User Demo</button>
+                        <button class="button secondary transition-3d-hover" type="submit">User Demo</button>
                     </form>
 
                 </div>

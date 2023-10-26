@@ -1,32 +1,172 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <title>HikeGroop | Group Detail</title>
-    <link rel="icon" href="~/assets/images/logo.png" type="image/png" sizes="16x16">
 
-    <link rel="stylesheet" href="~/assets/css/main.min.css">
-    <link rel="stylesheet" href="~/assets/css/style.css">
-    <link rel="stylesheet" href="~/assets/css/color.css">
-    <link rel="stylesheet" href="~/assets/css/responsive.css">
-</head>
-<body>
-    <div class="page-loader" id="page-loader">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <title>HikeGroop | Group Detail</title>
+        <link rel="icon" href="~/assets/images/logo.png" type="image/png" sizes="18x18">
 
-        <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
+        <link rel="stylesheet" href="~/assets/css/main.min.css">
+        <link rel="stylesheet" href="~/assets/css/style.css">
+        <link rel="stylesheet" href="~/assets/css/color.css">
+        <link rel="stylesheet" href="~/assets/css/responsive.css">
+    </head>
 
-    </div><!-- page loader -->
-    <div>
-        @RenderBody()
-    </div>
+    <body>
+        <div class="page-loader" id="page-loader">
 
-   	<script src="~/assets/js/main.min.js"></script>
-	<script src="~/assets/js/sparkline.js"></script>
-	<script src="~/assets/js/chart.js"></script>
-	<script src="~/assets/js/script.js"></script>
-</body>
+            <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span
+                    class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span
+                    class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span
+                    class="loader-item"></span><span class="loader-item"></span></div>
+
+        </div><!-- page loader -->
+
+        <div class="theme-layout">
+
+            <div class="responsive-header">
+                <div class="logo res"><img src="~/assets/images/logo.png" alt=""><span>HikeGroop</span></div>
+                <div class="user-avatar mobile">
+                    <a title="View Profile"><img alt="" src="~/assets/images/resources/user.jpg"></a>
+                    <div class="name">
+                        <h4>Danial Cardos</h4>
+                        <span>Manila, Philippines</span>
+                    </div>
+                </div>
+                <div class="right-compact">
+                    <div class="sidemenu">
+                        <i>
+                            <svg id="side-menu2" xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+                                <line x1="3" y1="12" x2="21" y2="12"></line>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="18" x2="21" y2="18"></line>
+                            </svg></i>
+                    </div>
+                    <div class="res-search">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-search">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg></span>
+                    </div>
+
+                </div>
+                <div class="restop-search">
+                    <span class="hide-search"><i class="icofont-close-circled"></i></span>
+                    <form method="post">
+                        <input type="text" placeholder="Search...">
+                    </form>
+                </div>
+            </div><!-- responsive header -->
+
+            <header class="">
+                <div class="topbar stick">
+                    <div class="logo"><img src="~/assets/images/logo.png" alt=""><span>HikeGroop</span></div>
+                    <div class="searches">
+                        <form method="post">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><i class="icofont-search"></i></button>
+                            <span class="cancel-search"><i class="icofont-close"></i></span>
+                            <div class="recent-search">
+                                <h4 class="recent-searches">Your Recent Search</h4>
+                                <ul class="so-history">
+
+                                    <li>
+                                        <div class="searched-user">
+                                            <figure><img src="~/assets/images/resources/user5.jpg" alt=""></figure>
+                                            <span>Jack Carter</span>
+                                        </div>
+                                        <span class="trash"><i class="icofont-close-circled"></i></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="web-elements">
+
+                        <li>
+                            <a href="#" title="">
+                                <i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-grid">
+                                        <rect x="3" y="3" width="7" height="7"></rect>
+                                        <rect x="14" y="3" width="7" height="7"></rect>
+                                        <rect x="14" y="14" width="7" height="7"></rect>
+                                        <rect x="3" y="14" width="7" height="7"></rect>
+                                    </svg>
+                                </i>
+                            </a>
+                            <ul class="dropdown">
+                                <li><a href="@Url.Action("Index","Dashboard")" title=""><i
+                                            class="icofont-user-alt-3"></i> Your Dashboard</a>
+                                </li>
+                                <li><a href="@Url.Action("Index","Group")" title=""><i class="icofont-people"></i>
+                                        Groups</a>
+                                </li>
+                                <li><a href="@Url.Action("Index","Destination")" title=""><i class="icofont-hill"></i>
+                                        Destination</a>
+                                </li>
+                                <li><a href="@Url.Action("Index","User")" title=""><i class="icofont-users-social"></i>
+                                        Hikers</a>
+                                </li>
+                                <li><a class="dark-mod" href="#"><i class="icofont-moon"></i> Dark Mode</a></li>
+                                <li class="logout">
+                                    <form asp-controller="Account" asp-action="Logout">
+                                        <button class="main-btn2"><i class="icofont-power"></i> Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        </li>
+                    </ul>
+                </div>
+
+            </header><!-- header -->
+
+            <nav class="sidebar">
+                <ul class="menu-slide">
+                    <li class="active menu-item-has-children">
+                        <a class="" href="#" title="">
+                            <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round"
+                                    stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none"
+                                    viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                    <polyline points="9 22 9 12 15 12 15 22" />
+                                </svg></i> Home
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="@Url.Action("Index","Dashboard")">Dashboard</a></li>
+                            <li><a href="@Url.Action("Detail","User", new{Id = @Model.Id})">Your Profile</a></li>
+                            <li><a href="@Url.Action("Index","User")">Hikers</a></li>
+                            <li><a href="@Url.Action("Index","Group")">Groups</a></li>
+                            <li><a href="@Url.Action("Index","Destination")">Destinations</a></li>
+                            <li><a class="dark-mod" href="#">Dark Mode</a></li>
+                            <li><a type="button" asp-controller="Account" asp-action="Logout">Logout</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+
+            <div>
+            @RenderBody()
+            </div>
+
+        </div>
+        <script src="~/assets/js/main.min.js"></script>
+        <script src="~/assets/js/sparkline.js"></script>
+        <script src="~/assets/js/chart.js"></script>
+        <script src="~/assets/js/script.js"></script>
+    </body>
+
 </html>
