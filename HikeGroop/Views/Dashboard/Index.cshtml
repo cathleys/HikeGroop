@@ -7,7 +7,7 @@
 
 @{
     ViewData["Title"] = "Dashboard";
-    Layout = "~/Views/Shared/_DestinationForms.cshtml";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 
 }
 
@@ -59,13 +59,13 @@
                                         <li><i class="icofont-heart"></i><span>1.3k</span></li>
                                         <div class="btn-group">
                                             <a type="btn btn-success" asp-controller="Group" asp-action="Detail"
-                                                asp-route-id="@item?.Id" class="btn btn-sm btn-outline-info">View</a>
+                                                asp-route-id="@item?.Id" class="button soft-primary">View</a>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
-                                                <a asp-controller="Group" asp-action="Edit" asp-route-id="@item?.Id" class="btn btn-sm
-                                                    btn-outline-secondary">Edit</a>
-                                                <a asp-controller="Group" asp-action="Delete" asp-route-id="@item?.Id" class="btn btn-sm
-                                                    btn-outline-warning">Delete</a>
+                                                <a asp-controller="Group" asp-action="Edit" asp-route-id="@item?.Id"
+                                                    class="button soft-success">Edit</a>
+                                                <a asp-controller="Group" asp-action="Delete" asp-route-id="@item?.Id"
+                                                    class="button soft-danger">Delete</a>
                                             }
                                         </div>
 
@@ -111,15 +111,13 @@
                                         <li><i class="icofont-heart"></i><span>1.5k</span></li>
                                         <div class="btn-group">
                                             <a type="btn btn-success" asp-controller="Destination" asp-action="Detail"
-                                                asp-route-id="@item?.Id" class="btn btn-sm btn-outline-info">View</a>
+                                                asp-route-id="@item?.Id" class="button soft-primary">View</a>
                                             @if (SignInManager.IsSignedIn(User))
                                             {
                                                 <a asp-controller="Destination" asp-action="Edit" asp-route-id="@item?.Id"
-                                                    class="btn btn-sm
-                                                    btn-outline-secondary">Edit</a>
+                                                    class="button soft-info">Edit</a>
                                                 <a asp-controller="Destination" asp-action="Delete" asp-route-id="@item?.Id"
-                                                    class="btn btn-sm
-                                                    btn-outline-warning">Delete</a>
+                                                    class="button soft-danger">Delete</a>
                                             }
                                         </div>
 
