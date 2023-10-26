@@ -26,7 +26,8 @@ namespace HikeGroop.Controllers
                     Id = user.Id,
                     UserName = user.UserName,
                     ProfileImageUrl = user.ProfileImageUrl,
-                    HikerType = user.HikerType
+                    HikerType = user.HikerType,
+                    City = user.City
 
                 };
 
