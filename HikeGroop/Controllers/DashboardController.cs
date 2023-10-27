@@ -76,7 +76,7 @@ namespace HikeGroop.Controllers
                 MapUserEdit(user, editUserViewModel, imageUploadResult);
                 await _dashboardRepository.Update(user);
 
-                return View("Index");
+                return RedirectToAction("Detail", "User", new { user.Id });
 
             }
             else
@@ -95,8 +95,9 @@ namespace HikeGroop.Controllers
 
                 var imageUploadResult = await _photoService.AddPhotoAsync(editUserViewModel.Image);
                 MapUserEdit(user, editUserViewModel, imageUploadResult);
+                await _dashboardRepository.Update(user);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Detail", "User", new { user.Id });
             }
 
         }

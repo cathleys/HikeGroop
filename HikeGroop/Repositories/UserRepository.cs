@@ -28,7 +28,7 @@ public class UserRepository : IUserRepository
 
     public async Task<IEnumerable<AppUser>> GetAllUsers()
     {
-        return await _context.Users.ToListAsync();
+        return await _context.Users.OrderBy(u => u.Id).ToListAsync();
     }
 
     public async Task<AppUser> GetUserById(string userId)

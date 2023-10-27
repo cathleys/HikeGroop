@@ -34,7 +34,7 @@
                         <a>@item.City</a>
                         @if (item.HikerType != null)
                         {
-                          <span>Level: @item.HikerType</span>
+                          <span>@item.HikerType</span>
 
                         }
                         <form asp-controller="User" asp-action="Detail" asp-route-id="@item.Id">
