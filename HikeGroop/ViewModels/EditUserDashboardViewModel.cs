@@ -10,6 +10,6 @@ public class EditUserDashboardViewModel
     [Display(Name = "Hiker Type")]
     public HikerType HikerType { get; set; }
     public string? ProfileImageUrl { get; set; }
-    public IFormFile? Image { get; set; }
+    public IFormFile Image { get; set; }
     public string? City { get; set; }
 }

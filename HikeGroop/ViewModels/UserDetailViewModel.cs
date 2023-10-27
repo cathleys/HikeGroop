@@ -11,4 +11,5 @@ public class UserDetailViewModel
     public HikerType? HikerType { get; set; }
     public string? City { get; set; }
     public string? ProfileImageUrl { get; set; }
+
 }
