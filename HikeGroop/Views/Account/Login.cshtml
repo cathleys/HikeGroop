@@ -77,15 +77,19 @@
                     <button class="main-btn" type="submit"><i class="icofont-key"></i> Login</button>
 
                 </form>
-
-                <div class="col-auto mt-3">
-
+                <hr />
+                <div class="col-auto mt-3 text-center">
+                    --OR--
+                    <div class="row"></div>
                     <form asp-controller="DemoAccount" asp-action="DemoAdmin" method="post">
                         <button class="button dark" type="submit">Demo Admin</button>
                     </form>
 
                     <form asp-controller="DemoAccount" asp-action="DemoUser" method="post">
                         <button class="button secondary transition-3d-hover" type="submit">Demo User</button>
+                    </form>
+                    <form asp-controller="Account" asp-action="Register" method="post">
+                        <a class="classic-btn" type="submit">Create An Account</a>
                     </form>
 
                 </div>
