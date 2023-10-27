@@ -136,14 +136,14 @@ public class Seed
 
             //Users
             var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-            string adminUserEmail = "cathdev@gmail.com";
+            string adminUserEmail = "admin@gmail.com";
 
             var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
             if (adminUser == null)
             {
                 var newAdminUser = new AppUser
                 {
-                    UserName = "cathdev",
+                    UserName = "admin",
                     Email = adminUserEmail,
                     EmailConfirmed = true,
                     Address = new Address
@@ -155,14 +155,14 @@ public class Seed
                 await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
             }
 
-            string appUserEmail = "user@etickets.com";
+            string appUserEmail = "user@gmail.com";
 
             var appUser = await userManager.FindByEmailAsync(appUserEmail);
             if (appUser == null)
             {
                 var newAppUser = new AppUser
                 {
-                    UserName = "member",
+                    UserName = "user",
                     Email = appUserEmail,
                     EmailConfirmed = true,
                     Address = new Address
