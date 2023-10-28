@@ -2,6 +2,9 @@
 using HikeGroop.Interfaces;
 using HikeGroop.Models;
 using Microsoft.EntityFrameworkCore;
+using cloudscribe.Pagination.Models;
+using HikeGroop.Helpers;
+
 
 namespace HikeGroop.Repositories;
 
@@ -29,6 +32,27 @@ public class UserRepository : IUserRepository
     public async Task<IEnumerable<AppUser>> GetAllUsers()
     {
         return await _context.Users.OrderBy(u => u.Id).ToListAsync();
+    }
+    public async Task<PagedResult<AppUser>> GetMembers(PaginationParams paginationParams)
+    {
+        var query = _context.Users.AsQueryable();
+
+        int excludeRecords = (paginationParams.PageSize * paginationParams.PageNumber) - paginationParams.PageSize;
+
+        query = query.OrderBy(u => u.Id)
+        .Skip(excludeRecords)
+        .Take(paginationParams.PageSize);
+
+
+        var result = new PagedResult<AppUser>
+        {
+            Data = await query.AsNoTracking().ToListAsync(),
+            TotalItems = await _context.Users.CountAsync(),
+            PageNumber = paginationParams.PageNumber,
+            PageSize = paginationParams.PageSize
+        };
+
+        return result;
     }
 
     public async Task<AppUser> GetUserById(string userId)

@@ -1,4 +1,6 @@
-﻿using HikeGroop.Data;
+﻿using cloudscribe.Pagination.Models;
+using HikeGroop.Data;
+using HikeGroop.Helpers;
 using HikeGroop.Interfaces;
 using HikeGroop.Models;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +48,27 @@ namespace HikeGroop.Repositories
         public async Task<IEnumerable<Destination>> GetDestinations()
         {
             return await _context.Destinations.ToListAsync();
+        }
+
+        public async Task<PagedResult<Destination>> GetDestinations(PaginationParams paginationParams)
+        {
+            var query = _context.Destinations.AsQueryable();
+
+            var excludeRecords = (paginationParams.PageSize * paginationParams.PageNumber)
+             - paginationParams.PageSize;
+
+            query = query.Skip(excludeRecords).Take(paginationParams.PageSize);
+
+
+            var result = new PagedResult<Destination>
+            {
+                Data = await query.AsNoTracking().ToListAsync(),
+                TotalItems = await _context.Destinations.CountAsync(),
+                PageNumber = paginationParams.PageNumber,
+                PageSize = paginationParams.PageSize
+            };
+            return result;
+
         }
 
         public async Task<bool> Save()

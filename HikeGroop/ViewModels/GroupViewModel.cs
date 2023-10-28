@@ -1,4 +1,5 @@
-﻿using HikeGroop.Models;
+﻿using cloudscribe.Pagination.Models;
+using HikeGroop.Models;
 
 namespace HikeGroop.ViewModels;
 
