@@ -1,5 +1,6 @@
 ﻿using HikeGroop.Data.Enums;
 using HikeGroop.Extensions;
+using HikeGroop.Helpers;
 using HikeGroop.Interfaces;
 using HikeGroop.Models;
 using HikeGroop.ViewModels;
@@ -22,6 +23,12 @@ namespace HikeGroop.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+        [HttpGet("hiking-activities")]
+        public async Task<IActionResult> Index(PaginationParams paginationParams)
+        {
+            var dests = await _destinationRepository.GetDestinations(paginationParams);
+            return View(dests);
+        }
         public async Task<IActionResult> Index()
         {
             var dests = await _destinationRepository.GetDestinations();

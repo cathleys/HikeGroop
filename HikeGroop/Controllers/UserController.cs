@@ -1,6 +1,9 @@
-﻿using HikeGroop.Interfaces;
+﻿using cloudscribe.Pagination.Models;
+using HikeGroop.Helpers;
+using HikeGroop.Interfaces;
 using HikeGroop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace HikeGroop.Controllers
 {
@@ -14,7 +17,12 @@ namespace HikeGroop.Controllers
         }
 
         [HttpGet("users")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(PaginationParams paginationParams)
+        {
+            var users = await _userRepository.GetMembers(paginationParams);
+            return View(users);
+        }
+        public async Task<IActionResult> Index2()
         {
             var users = await _userRepository.GetAllUsers();
             var result = new List<UserViewModel>();

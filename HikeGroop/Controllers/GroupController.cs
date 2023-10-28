@@ -1,4 +1,5 @@
 ﻿using HikeGroop.Extensions;
+using HikeGroop.Helpers;
 using HikeGroop.Interfaces;
 using HikeGroop.Models;
 using HikeGroop.ViewModels;
@@ -24,7 +25,15 @@ namespace HikeGroop.Controllers
 
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet("groups")]
+        public async Task<IActionResult> Index(PaginationParams paginationParams)
+        {
+            var groups = await _groupRepository
+            .GetGroupsPerPage(paginationParams);
+
+            return View(groups);
+        }
+        public async Task<IActionResult> Index2()
         {
 
             var currentUser = _httpContextAccessor.HttpContext?.User.GetUsername();

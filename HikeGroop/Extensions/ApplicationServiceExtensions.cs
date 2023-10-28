@@ -20,6 +20,7 @@ namespace HikeGroop.Extensions
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IDashboardRepository, DashboardRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddCloudscribePagination();
 
             return services;
         }
