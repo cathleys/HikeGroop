@@ -33,11 +33,20 @@ public class UserRepository : IUserRepository
     {
         return await _context.Users.OrderBy(u => u.Id).ToListAsync();
     }
-    public async Task<PagedResult<AppUser>> GetMembers(PaginationParams paginationParams)
+    public async Task<PagedResult<AppUser>> GetMembers(PaginationParams paginationParams,
+    string city)
     {
         var query = _context.Users.AsQueryable();
 
         int excludeRecords = (paginationParams.PageSize * paginationParams.PageNumber) - paginationParams.PageSize;
+
+        var userCount = await query.CountAsync();
+
+        if (!string.IsNullOrEmpty(city))
+        {
+            query = query.Where(d => d.City.Contains(city));
+            userCount = await query.CountAsync();
+        }
 
         query = query.OrderBy(u => u.Id)
         .Skip(excludeRecords)
@@ -47,7 +56,7 @@ public class UserRepository : IUserRepository
         var result = new PagedResult<AppUser>
         {
             Data = await query.AsNoTracking().ToListAsync(),
-            TotalItems = await _context.Users.CountAsync(),
+            TotalItems = userCount,
             PageNumber = paginationParams.PageNumber,
             PageSize = paginationParams.PageSize
         };

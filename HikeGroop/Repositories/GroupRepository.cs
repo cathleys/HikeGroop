@@ -43,11 +43,20 @@ namespace HikeGroop.Repositories
                 .FirstOrDefaultAsync(g => g.Id == id);
         }
 
-        public async Task<PagedResult<Group>> GetGroupsPerPage(PaginationParams paginationParams)
+        public async Task<PagedResult<Group>> GetGroupsPerPage(PaginationParams paginationParams, string city)
         {
             var query = _context.Groups.AsQueryable();
 
             var excludeRecords = (paginationParams.PageSize * paginationParams.PageNumber) - paginationParams.PageSize;
+            var groupCount = await query.CountAsync();
+
+            if (!string.IsNullOrEmpty(city))
+            {
+                query = query.Where(c => c.Address.City.Contains(city));
+                groupCount = await query.CountAsync();
+
+            }
+
 
             query = query.Skip(excludeRecords).Take(paginationParams.PageSize);
 
@@ -55,7 +64,7 @@ namespace HikeGroop.Repositories
             var result = new PagedResult<Group>
             {
                 Data = await query.AsNoTracking().ToListAsync(),
-                TotalItems = await _context.Groups.CountAsync(),
+                TotalItems = groupCount,
                 PageNumber = paginationParams.PageNumber,
                 PageSize = paginationParams.PageSize
             };
@@ -83,5 +92,7 @@ namespace HikeGroop.Repositories
             _context.Update(group);
             return await Save();
         }
+
+
     }
 }

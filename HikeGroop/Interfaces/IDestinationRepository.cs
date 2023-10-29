@@ -7,7 +7,8 @@ namespace HikeGroop.Interfaces
     public interface IDestinationRepository
     {
         Task<IEnumerable<Destination>> GetDestinations();
-        Task<PagedResult<Destination>> GetDestinations(PaginationParams paginationParams);
+        Task<PagedResult<Destination>> GetDestinationsPerPage(PaginationParams paginationParams, string searchString);
+        Task<IEnumerable<Destination>> GetDestinationByCity(string city);
         Task<Destination> GetDestinationByIdAsync(int id);
         Task<Destination> GetDestinationByIdAsyncNoTracking(int id);
         Task<bool> Add(Destination destination);
