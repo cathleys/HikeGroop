@@ -7,15 +7,7 @@
     Layout = "~/Views/Shared/_Login.cshtml";
 }
 
-<div class="page-loader" id="page-loader">
-
-    <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span
-            class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span
-            class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span
-            class="loader-item"></span><span class="loader-item"></span></div>
-
-</div><!-- page loader -->
-
+<partial name="_LoadingSpinnerPartial" />
 <div class="theme-layout">
 
     <div class="authtication bluesh high-opacity">
@@ -54,9 +46,9 @@
 
                 @if (TempData["Error"] != null)
                 {
-                        <div class="col-md-12 alert alert-danger">
-                            <span><b>Sorry!</b> - @TempData["Error"]</span>
-                        </div>
+                    <div class="col-md-12 alert alert-danger">
+                        <span><b>Sorry!</b> - @TempData["Error"]</span>
+                    </div>
                 }
                 <form asp-action="Login" method="post" class="c-form">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -80,17 +72,18 @@
                 <hr />
                 <div class="col-auto mt-3 text-center">
                     --OR--
-                    <br/>
+                    <br />
                     <div class="row">
-                    <form asp-controller="DemoAccount" asp-action="DemoAdmin" method="post">
-                        <button class="button dark" type="submit">Demo Admin</button>
-                    </form>
+                        <form asp-controller="DemoAccount" asp-action="DemoAdmin" method="post">
+                            <button class="button dark" type="submit">Demo Admin</button>
+                        </form>
 
-                    <form asp-controller="DemoAccount" asp-action="DemoUser" method="post">
-                        <button class="button secondary transition-3d-hover" type="submit">Demo User</button>
-                    </form>
+                        <form asp-controller="DemoAccount" asp-action="DemoUser" method="post">
+                            <button class="button secondary transition-3d-hover" type="submit">Demo User</button>
+                        </form>
 
-                        <a asp-controller="Account" asp-action="Register" method="post" class="classic-btn">Create An Account</a>
+                        <a asp-controller="Account" asp-action="Register" method="post" class="classic-btn">Create An
+                            Account</a>
 
                     </div>
 

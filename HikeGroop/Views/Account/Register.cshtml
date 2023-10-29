@@ -8,11 +8,7 @@
     Layout = "~/Views/Shared/_Register.cshtml";
 }
 
-<div class="page-loader" id="page-loader">
-
-    <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
-
-</div><!-- page loader -->
+<partial name="_LoadingSpinnerPartial" />
 <div class="theme-layout">
 
     <div class="authtication bluesh high-opacity">
@@ -21,7 +17,8 @@
                 <div class="logo"><img src="~/assets/images/logo.png" alt=""><span>HikeGroop</span></div>
                 <h1>Welcome to HikeGroop</h1>
                 <p>
-                    Every hiker and enthusiast is welcome to join this platform for free and find awesome groups where they can go to hiking activities together.
+                    Every hiker and enthusiast is welcome to join this platform for free and find awesome groups where
+                    they can go to hiking activities together.
                 </p>
             </div>
             <div class="bg-image" style="background-image: url(assets/images/resources/hikecomm.png)"></div>
@@ -63,7 +60,7 @@
                         <div class="col-lg-6 col-sm-6 col-md-6">
                             <label asp-for="HikerType"></label>
                             <select asp-for="HikerType" class="form-select"
-                                    asp-items="@Html.GetEnumSelectList<HikerType>()">
+                                asp-items="@Html.GetEnumSelectList<HikerType>()">
                                 <option>--select--</option>
                             </select>
                             <span asp-validation-for="HikerType" class="text-danger"></span>
@@ -93,4 +90,3 @@
     </div>
 
 </div>
-

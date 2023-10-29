@@ -7,7 +7,6 @@
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-
 	<section>
 		<div class="gap">
 			<div class="container">
@@ -64,12 +63,12 @@
                                          {
 										<div class="col-lg-4 col-md-4 col-sm-6">
 											<div class="event-post mb-3">
-												<figure><a href="event-detail.html" ><img src="@item.Image" alt=""></a></figure>
+												<figure><a href="@Url.Action("Detail", "Destination", new{Id = @item.Id})" ><img src="@item.Image" alt=""></a></figure>
 												<div class="event-meta">
 													<span>Book Schedule</span>
-													<h6><a href="event-detail.html">@item.Title</a></h6>
+													<h6><a href="@Url.Action("Detail", "Destination", new{Id = @item.Id})">@item.Title</a></h6>
 													<p>@item.Description</p>
-													<a class="classic-btn" href="#">Interested</a>
+													@* <a class="classic-btn" href="#">Interested</a> *@
 													<div class="more">
 														<div class="more-post-optns">
 															<i class="">
