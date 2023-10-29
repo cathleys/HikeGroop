@@ -50,25 +50,41 @@ namespace HikeGroop.Repositories
             return await _context.Destinations.ToListAsync();
         }
 
-        public async Task<PagedResult<Destination>> GetDestinations(PaginationParams paginationParams)
+        public async Task<PagedResult<Destination>> GetDestinationsPerPage(PaginationParams paginationParams,
+        string searchString)
         {
             var query = _context.Destinations.AsQueryable();
 
             var excludeRecords = (paginationParams.PageSize * paginationParams.PageNumber)
              - paginationParams.PageSize;
 
+            var destinationCount = await query.CountAsync();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(d => d.Title.Contains(searchString));
+                destinationCount = await query.CountAsync();
+            }
             query = query.Skip(excludeRecords).Take(paginationParams.PageSize);
 
 
             var result = new PagedResult<Destination>
             {
                 Data = await query.AsNoTracking().ToListAsync(),
-                TotalItems = await _context.Destinations.CountAsync(),
+                TotalItems = destinationCount,
                 PageNumber = paginationParams.PageNumber,
                 PageSize = paginationParams.PageSize
             };
             return result;
 
+        }
+
+
+
+        public async Task<IEnumerable<Destination>> GetDestinationByCity(string city)
+        {
+            return await _context.Destinations.Where(d => d.AppUser.Address.City
+            .Contains(city)).ToListAsync();
         }
 
         public async Task<bool> Save()

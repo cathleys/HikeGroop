@@ -16,34 +16,15 @@ namespace HikeGroop.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet("users")]
-        public async Task<IActionResult> Index(PaginationParams paginationParams)
+
+        public async Task<IActionResult> Index(PaginationParams paginationParams,
+        string searchString)
         {
-            var users = await _userRepository.GetMembers(paginationParams);
+            var users = await _userRepository.GetMembers(paginationParams, searchString);
             return View(users);
         }
-        public async Task<IActionResult> Index2()
-        {
-            var users = await _userRepository.GetAllUsers();
-            var result = new List<UserViewModel>();
 
-            foreach (var user in users)
-            {
-                var userViewModel = new UserViewModel
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    ProfileImageUrl = user.ProfileImageUrl,
-                    HikerType = user.HikerType,
-                    City = user.City
 
-                };
-
-                result.Add(userViewModel);
-            }
-
-            return View(result);
-        }
 
         public async Task<IActionResult> Detail(string id)
         {
