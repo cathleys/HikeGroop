@@ -50,7 +50,7 @@ namespace HikeGroop.Controllers
             TempData["Error"] = "User doesn't exist, please try again";
             return View(loginViewModel);
         }
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
             var register = new RegisterViewModel();
             return View(register);

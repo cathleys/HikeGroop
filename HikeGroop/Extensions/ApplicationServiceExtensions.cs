@@ -1,7 +1,9 @@
-﻿using HikeGroop.Helpers;
+﻿using HikeGroop.Data;
+using HikeGroop.Helpers;
 using HikeGroop.Interfaces;
 using HikeGroop.Repositories;
 using HikeGroop.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace HikeGroop.Extensions
 {
