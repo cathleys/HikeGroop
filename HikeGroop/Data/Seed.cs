@@ -6,6 +6,7 @@ namespace HikeGroop.Data;
 
 public class Seed
 {
+
     public static void SeedData(IApplicationBuilder applicationBuilder)
     {
         using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
