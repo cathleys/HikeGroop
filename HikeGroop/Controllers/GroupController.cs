@@ -25,7 +25,7 @@ namespace HikeGroop.Controllers
         }
 
 
-        public async Task<IActionResult> Index(PaginationParams paginationParams, 
+        public async Task<IActionResult> Index(PaginationParams paginationParams,
         string searchString)
         {
             var groups = await _groupRepository
@@ -138,7 +138,7 @@ namespace HikeGroop.Controllers
 
                     await _photoService.DeletePhotoAsync(publicId);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     ModelState.AddModelError("", "Failed to delete photo");
                     return View(editGroupViewModel);
