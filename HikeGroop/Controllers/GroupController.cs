@@ -94,7 +94,8 @@ namespace HikeGroop.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var currentUser = _httpContextAccessor.HttpContext?.User.GetUsername();
+            var currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
+
             var group = await _groupRepository.GetGroupByIdAsync(id);
 
             if (group == null) return View("Error");
@@ -105,7 +106,7 @@ namespace HikeGroop.Controllers
                 Description = group.Description,
                 Url = group.Image,
                 AddressId = (int)group.AddressId,
-                AppUserName = currentUser,
+                AppUserId = currentUserId,
                 Address = new Address
                 {
                     City = group.Address.City
@@ -153,6 +154,7 @@ namespace HikeGroop.Controllers
                     Name = editGroupViewModel.Name,
                     Description = editGroupViewModel.Description,
                     Image = imageResult.SecureUrl.AbsoluteUri,
+                    AppUserId = editGroupViewModel.AppUserId,
                     AddressId = editGroupViewModel.AddressId,
                     Address = editGroupViewModel.Address
 
