@@ -51,6 +51,7 @@
                                         <h6>Basic Profile</h6>
                                         <p>Information about your Groop</p>
                                         <form method="post" asp-action="Edit" enctype="multipart/form-data">
+                                            <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId">
                                             <input type="hidden" value="ItineraryId" id="ItineraryId" />
                                             <fieldset class="row merged-10">
                                                 <div class="mb-4 col-lg-12">

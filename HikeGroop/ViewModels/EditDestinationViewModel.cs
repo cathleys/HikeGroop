@@ -22,5 +22,6 @@ namespace HikeGroop.ViewModels
 
         public int ItineraryId { get; set; }
         public Itinerary Itinerary { get; set; }
+        public string AppUserId { get; set; }
     }
 }

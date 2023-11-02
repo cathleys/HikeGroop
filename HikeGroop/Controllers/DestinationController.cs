@@ -106,6 +106,7 @@ namespace HikeGroop.Controllers
                 TrailClass = dest.TrailClass,
                 ItineraryId = (int)dest.ItineraryId,
                 Itinerary = dest.Itinerary,
+                AppUserId = dest.AppUserId
 
             };
             return View(destVM);
@@ -130,7 +131,7 @@ namespace HikeGroop.Controllers
 
                     await _photoService.DeletePhotoAsync(publicId);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     ModelState.AddModelError("", "Failed to delete photo");
                     return View(editDestViewModel);
@@ -148,7 +149,9 @@ namespace HikeGroop.Controllers
                     HikingTour = editDestViewModel.HikingTour,
                     TrailClass = editDestViewModel.TrailClass,
                     ItineraryId = editDestViewModel.ItineraryId,
-                    Itinerary = editDestViewModel.Itinerary
+                    Itinerary = editDestViewModel.Itinerary,
+                    AppUserId = editDestViewModel.AppUserId
+
                 };
 
                 await _destinationRepository.Update(editDestination);
