@@ -1,17 +1,17 @@
-Visit the live link on **https://hikegroop.fly.dev**
+### Visit the live link on **https://hikegroop.fly.dev**
 
 ## How I worked on this project
 
 My goal is to simulate building real-world web application.
 
-<li>I used feature branches and Pull Requests: </li>[Example PR](https://github.com/cathleys/HikeGroop/pull/28)
+- I used feature branches and Pull Requests: [Example PR](https://github.com/cathleys/HikeGroop/pull/28)
 
 ## How to navigate this project
 
-<li>Somewhat complex application logic: [Example code](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop/Controllers/GroupController.cs#L123)</li>
-<li>This app implements Repository patterns: [Example database call](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop/Repositories/DestinationRepository.cs)</li>
-<li>CI/CD pipeline : </li>[Example image](HikeGroop/wwwroot/assets/images/ci.JPG)
-<li>Unit test : </li>[Example test](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop.Tests/Controllers/GroupControllerTests.cs#L35)
+- Somewhat complex application logic: [Example code](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop/Controllers/GroupController.cs#L123)
+- This app implements Repository patterns: [Example database call](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop/Repositories/DestinationRepository.cs)
+- CI/CD pipeline : [Example image](HikeGroop/wwwroot/assets/images/ci.JPG)
+- Unit test : [Example test](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop.Tests/Controllers/GroupControllerTests.cs#L35)
 
 ## Why I built the project this way
 
@@ -23,8 +23,8 @@ Testing is essential part of app development. XUnit with FluentAssertions is wha
 
 ## If I had more time I would change this
 
-<li>Implement Unit of Work pattern to centralized my repositories</li>
-<li>Remove "?" in the Domain Models [Example Model](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop/Models/Destination.cs)</li>
+- Implement Unit of Work pattern to centralized my repositories
+- Remove "?" in the Domain Models [Example Model](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop/Models/Destination.cs)
 
 \***\*\*\*\*\***The End\***\*\*\*\*\*\***
 
