@@ -7,10 +7,84 @@ namespace HikeGroop.Data;
 public class Seed
 {
 
-    public static void SeedData(IApplicationBuilder applicationBuilder)
+    public static async Task SeedData(IApplicationBuilder applicationBuilder)
     {
         using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
         {
+            //Roles
+            var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            if (!await roleManager.RoleExistsAsync(UserRoles.Member))
+                await roleManager.CreateAsync(new IdentityRole(UserRoles.Member));
+
+            //Users
+            var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+            string adminUserEmail = "admin@gmail.com";
+
+            var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+            if (adminUser == null)
+            {
+                var newAdminUser = new AppUser
+                {
+                    UserName = "admin",
+                    Email = adminUserEmail,
+                    EmailConfirmed = true,
+                    HikerType = Enums.HikerType.Advance,
+                    ProfileImageUrl = "https://randomuser.me/api/portraits/women/58.jpg",
+                    Address = new Address
+                    {
+                        City = "Pasig City",
+                    }
+                };
+                await userManager.CreateAsync(newAdminUser, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+            }
+
+            string adminUserEmail2 = "cathdev@gmail.com";
+
+            var adminUser2 = await userManager.FindByEmailAsync(adminUserEmail);
+            if (adminUser2 == null)
+            {
+                var newAdminUser = new AppUser
+                {
+                    UserName = "Cath Leyson",
+                    Email = adminUserEmail2,
+                    EmailConfirmed = true,
+                    HikerType = Enums.HikerType.Beginner,
+                    Address = new Address
+                    {
+                        City = "Pasig City",
+                    }
+                };
+                await userManager.CreateAsync(newAdminUser, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+            }
+
+            string appUserEmail = "user@gmail.com";
+
+            var appUser = await userManager.FindByEmailAsync(appUserEmail);
+            if (appUser == null)
+            {
+                var newAppUser = new AppUser
+                {
+                    UserName = "user",
+                    Email = appUserEmail,
+                    EmailConfirmed = true,
+                    HikerType = Enums.HikerType.Intermediate,
+                    ProfileImageUrl = "https://randomuser.me/api/portraits/men/0.jpg",
+                    Address = new Address
+                    {
+                        City = "Pasig City",
+                    }
+                };
+                await userManager.CreateAsync(newAppUser, "Pa$$w0rd");
+                await userManager.AddToRoleAsync(newAppUser, UserRoles.Member);
+            }
+
+
+            //destination
             var context = serviceScope.ServiceProvider.GetService<DataContext>();
 
             context.Database.EnsureCreated();
@@ -81,6 +155,7 @@ public class Seed
                 context.SaveChanges();
             }
 
+            //groups
             if (!context.Groups.Any())
             {
                 context.Groups.AddRange(new List<Group>()
@@ -120,60 +195,8 @@ public class Seed
             }
 
 
-        }
-    }
 
-    public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
-    {
-        using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
-        {
-            //Roles
-            var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
-                await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-            if (!await roleManager.RoleExistsAsync(UserRoles.Member))
-                await roleManager.CreateAsync(new IdentityRole(UserRoles.Member));
-
-            //Users
-            var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-            string adminUserEmail = "admin@gmail.com";
-
-            var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
-            if (adminUser == null)
-            {
-                var newAdminUser = new AppUser
-                {
-                    UserName = "admin",
-                    Email = adminUserEmail,
-                    EmailConfirmed = true,
-                    Address = new Address
-                    {
-                        City = "Pasig City",
-                    }
-                };
-                await userManager.CreateAsync(newAdminUser, "Pa$$w0rd");
-                await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
-            }
-
-            string appUserEmail = "user@gmail.com";
-
-            var appUser = await userManager.FindByEmailAsync(appUserEmail);
-            if (appUser == null)
-            {
-                var newAppUser = new AppUser
-                {
-                    UserName = "user",
-                    Email = appUserEmail,
-                    EmailConfirmed = true,
-                    Address = new Address
-                    {
-                        City = "Pasig City",
-                    }
-                };
-                await userManager.CreateAsync(newAppUser, "Pa$$w0rd");
-                await userManager.AddToRoleAsync(newAppUser, UserRoles.Member);
-            }
         }
     }
 
