@@ -1,4 +1,3 @@
-using HikeGroop;
 using HikeGroop.Data;
 using HikeGroop.Extensions;
 using HikeGroop.Models;
@@ -84,8 +83,8 @@ try
 {
     var context = services.GetRequiredService<DataContext>();
     await context.Database.MigrateAsync();
-    Seed.SeedData(app);
-    await Seed.SeedUsersAndRolesAsync(app);
+
+    await Seed.SeedData(app);
 }
 catch (Exception ex)
 {
