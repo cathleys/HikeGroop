@@ -13,21 +13,14 @@ namespace HikeGroop.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly IGroupRepository _groupRepository;
-    private readonly IDestinationRepository _destinationRepository;
+    private readonly IUnitOfWork _uow;
     private readonly IPInfoSettings _ipInfoOptions;
 
-    public HomeController(
-    ILogger<HomeController> logger,
-    IGroupRepository groupRepository,
-    IDestinationRepository destinationRepository,
+    public HomeController(IUnitOfWork uow,
     IOptions<IPInfoSettings> ipInfoOptions
     )
     {
-        _logger = logger;
-        _groupRepository = groupRepository;
-        _destinationRepository = destinationRepository;
+        _uow = uow;
         _ipInfoOptions = ipInfoOptions.Value;
     }
 
@@ -52,7 +45,7 @@ public class HomeController : Controller
 
             if (homeViewModel.City != null)
             {
-                homeViewModel.Groups = await _groupRepository
+                homeViewModel.Groups = await _uow.GroupRepository
                 .GetGroupsByCity(homeViewModel.City);
             }
             else

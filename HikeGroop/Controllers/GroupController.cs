@@ -3,22 +3,25 @@ using HikeGroop.Helpers;
 using HikeGroop.Interfaces;
 using HikeGroop.Models;
 using HikeGroop.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HikeGroop.Controllers
 {
+    [Authorize]
     public class GroupController : Controller
     {
-        private readonly IGroupRepository _groupRepository;
+        private readonly IUnitOfWork _uow;
         private readonly IPhotoService _photoService;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-
-        public GroupController(IGroupRepository groupRepository,
-            IPhotoService photoService, IHttpContextAccessor httpContextAccessor
+        public GroupController(IUnitOfWork uow,
+            IPhotoService photoService,
+            IHttpContextAccessor httpContextAccessor
            )
         {
-            _groupRepository = groupRepository;
+
+            _uow = uow;
             _photoService = photoService;
             _httpContextAccessor = httpContextAccessor;
 
@@ -28,7 +31,7 @@ namespace HikeGroop.Controllers
         public async Task<IActionResult> Index(PaginationParams paginationParams,
         string searchString)
         {
-            var groups = await _groupRepository
+            var groups = await _uow.GroupRepository
             .GetGroupsPerPage(paginationParams, searchString);
 
             return View(groups);
@@ -37,7 +40,7 @@ namespace HikeGroop.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             var currentUser = _httpContextAccessor.HttpContext?.User.GetUsername();
-            var group = await _groupRepository.GetGroupByIdAsync(id);
+            var group = await _uow.GroupRepository.GetGroupByIdAsync(id);
 
             var groupDetailViewModel = new GroupDetailViewModel
             {
@@ -80,7 +83,7 @@ namespace HikeGroop.Controllers
                     }
 
                 };
-                await _groupRepository.Add(newGroup);
+                await _uow.GroupRepository.Add(newGroup);
                 return RedirectToAction("Index", "Dashboard");
             }
             else
@@ -88,15 +91,13 @@ namespace HikeGroop.Controllers
                 ModelState.AddModelError("", "Photo upload failed");
             }
             return View(groupVM);
-
-            ;
         }
 
         public async Task<IActionResult> Edit(int id)
         {
             var currentUserId = _httpContextAccessor.HttpContext?.User.GetUserId();
 
-            var group = await _groupRepository.GetGroupByIdAsync(id);
+            var group = await _uow.GroupRepository.GetGroupByIdAsync(id);
 
             if (group == null) return View("Error");
 
@@ -128,7 +129,7 @@ namespace HikeGroop.Controllers
                 return View("Edit", editGroupViewModel);
             }
 
-            var getGroup = await _groupRepository.GetGroupByIdAsyncNoTracking(id);
+            var getGroup = await _uow.GroupRepository.GetGroupByIdAsyncNoTracking(id);
 
             if (getGroup != null)
             {
@@ -161,7 +162,7 @@ namespace HikeGroop.Controllers
 
                 };
 
-                await _groupRepository.Update(editGroup);
+                await _uow.GroupRepository.Update(editGroup);
                 return RedirectToAction("Index");
 
             }
@@ -173,7 +174,7 @@ namespace HikeGroop.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var group = await _groupRepository.GetGroupByIdAsync(id);
+            var group = await _uow.GroupRepository.GetGroupByIdAsync(id);
             if (group == null) return View("Error");
 
             return View(group);
@@ -182,7 +183,7 @@ namespace HikeGroop.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteGroup(int id)
         {
-            var group = await _groupRepository.GetGroupByIdAsync(id);
+            var group = await _uow.GroupRepository.GetGroupByIdAsync(id);
 
             if (group == null) return View("Error");
 
@@ -191,7 +192,7 @@ namespace HikeGroop.Controllers
                 await _photoService.DeletePhotoAsync(group.Image);
             }
 
-            await _groupRepository.Delete(group);
+            await _uow.GroupRepository.Delete(group);
             return RedirectToAction("Index", "Dashboard");
         }
     }
