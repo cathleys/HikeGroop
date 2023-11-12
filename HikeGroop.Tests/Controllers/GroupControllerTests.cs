@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HikeGroop.Tests.Controllers;
 public class GroupControllerTests
 {
-    private readonly IGroupRepository _groupRepository;
+    private readonly IUnitOfWork _uow;
     private readonly IPhotoService _photoService;
     private readonly GroupController _groupController;
     private readonly IHttpContextAccessor _httpContextAccessor;
@@ -22,13 +22,13 @@ public class GroupControllerTests
     public GroupControllerTests()
     {
         //dependencies
-        _groupRepository = A.Fake<IGroupRepository>();
+        _uow = A.Fake<IUnitOfWork>();
         _photoService = A.Fake<IPhotoService>();
         _httpContextAccessor = A.Fake<IHttpContextAccessor>();
 
 
         //SUT
-        _groupController = new GroupController(_groupRepository, _photoService, _httpContextAccessor);
+        _groupController = new GroupController(_uow, _photoService, _httpContextAccessor);
     }
 
     [Fact]
@@ -43,7 +43,7 @@ public class GroupControllerTests
 
         var searchString = "snooze and shoes";
         var groups = A.Fake<PagedResult<Group>>();
-        A.CallTo(() => _groupRepository.GetGroupsPerPage(paginationParams, searchString)).Returns(groups);
+        A.CallTo(() => _uow.GroupRepository.GetGroupsPerPage(paginationParams, searchString)).Returns(groups);
 
         //Act
         var result = _groupController.Index(paginationParams, searchString);
@@ -59,7 +59,7 @@ public class GroupControllerTests
         // Arrange
         var id = 1;
         var group = A.Fake<Group>();
-        A.CallTo(() => _groupRepository.GetGroupByIdAsync(id)).Returns(group);
+        A.CallTo(() => _uow.GroupRepository.GetGroupByIdAsync(id)).Returns(group);
 
         // Act
         var result = _groupController.Detail(id);
@@ -102,7 +102,7 @@ public class GroupControllerTests
         // Arrange
         var id = 1;
         var group = A.Fake<Group>();
-        A.CallTo(() => _groupRepository.GetGroupByIdAsync(id)).Returns(group);
+        A.CallTo(() => _uow.GroupRepository.GetGroupByIdAsync(id)).Returns(group);
 
 
         // Act

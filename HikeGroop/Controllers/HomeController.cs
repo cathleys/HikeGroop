@@ -13,21 +13,14 @@ namespace HikeGroop.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly IGroupRepository _groupRepository;
-    private readonly IDestinationRepository _destinationRepository;
+    private readonly IUnitOfWork _uow;
     private readonly IPInfoSettings _ipInfoOptions;
 
-    public HomeController(
-    ILogger<HomeController> logger,
-    IGroupRepository groupRepository,
-    IDestinationRepository destinationRepository,
+    public HomeController(IUnitOfWork uow,
     IOptions<IPInfoSettings> ipInfoOptions
     )
     {
-        _logger = logger;
-        _groupRepository = groupRepository;
-        _destinationRepository = destinationRepository;
+        _uow = uow;
         _ipInfoOptions = ipInfoOptions.Value;
     }
 
@@ -38,28 +31,32 @@ public class HomeController : Controller
 
         try
         {
-            var url = $"https://ipinfo.io?token={_ipInfoOptions.Token}";
-            var info = new WebClient().DownloadString(url);
-            IPInfo? ipInfo = JsonConvert.DeserializeObject<IPInfo>(info);
+            using (HttpClient client = new HttpClient())
 
-            RegionInfo regionInfo = new RegionInfo(ipInfo.Country);
-
-            ipInfo.Country = regionInfo.EnglishName;
-
-            homeViewModel.City = ipInfo.City;
-            homeViewModel.Region = ipInfo.Region;
-
-
-            if (homeViewModel.City != null)
             {
-                homeViewModel.Groups = await _groupRepository
-                .GetGroupsByCity(homeViewModel.City);
+                var url = $"https://ipinfo.io?token={_ipInfoOptions.Token}";
+                var info = await client.GetStringAsync(url);
+                IPInfo? ipInfo = JsonConvert.DeserializeObject<IPInfo>(info);
+
+                RegionInfo regionInfo = new RegionInfo(ipInfo.Country);
+
+                ipInfo.Country = regionInfo.EnglishName;
+
+                homeViewModel.City = ipInfo.City;
+                homeViewModel.Region = ipInfo.Region;
+
+
+                if (homeViewModel.City != null)
+                {
+                    homeViewModel.Groups = await _uow.GroupRepository
+                    .GetGroupsByCity(homeViewModel.City);
+                }
+                else
+                {
+                    homeViewModel.Groups = null;
+                }
+                return View(homeViewModel);
             }
-            else
-            {
-                homeViewModel.Groups = null;
-            }
-            return View(homeViewModel);
         }
         catch (System.Exception)
         {

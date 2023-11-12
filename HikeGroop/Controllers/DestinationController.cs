@@ -9,14 +9,15 @@ namespace HikeGroop.Controllers
 {
     public class DestinationController : Controller
     {
-        private readonly IDestinationRepository _destinationRepository;
+        private readonly IUnitOfWork _uow;
         private readonly IPhotoService _photoService;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public DestinationController(IDestinationRepository destinationRepository,
-            IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
+        public DestinationController(IUnitOfWork uow,
+            IPhotoService photoService,
+            IHttpContextAccessor httpContextAccessor)
         {
-            _destinationRepository = destinationRepository;
+            _uow = uow;
             _photoService = photoService;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -25,7 +26,7 @@ namespace HikeGroop.Controllers
         public async Task<IActionResult> Index(PaginationParams paginationParams,
         string searchString)
         {
-            var dests = await _destinationRepository
+            var dests = await _uow.DestinationRepository
             .GetDestinationsPerPage(paginationParams, searchString);
 
             return View(dests);
@@ -33,7 +34,7 @@ namespace HikeGroop.Controllers
 
         public async Task<IActionResult> Detail(int id)
         {
-            var dest = await _destinationRepository.GetDestinationByIdAsync(id);
+            var dest = await _uow.DestinationRepository.GetDestinationByIdAsync(id);
             return View(dest);
         }
 
@@ -75,7 +76,7 @@ namespace HikeGroop.Controllers
 
                 };
 
-                await _destinationRepository.Add(newDestination);
+                await _uow.DestinationRepository.Add(newDestination);
                 return RedirectToAction("Index");
             }
             else
@@ -92,7 +93,7 @@ namespace HikeGroop.Controllers
         public async Task<IActionResult> Edit(int id)
         {
 
-            var dest = await _destinationRepository.GetDestinationByIdAsync(id);
+            var dest = await _uow.DestinationRepository.GetDestinationByIdAsync(id);
 
             if (dest == null) return View("Error");
 
@@ -121,7 +122,7 @@ namespace HikeGroop.Controllers
                 return View("Edit", editDestViewModel);
             }
 
-            var getDestination = await _destinationRepository.GetDestinationByIdAsyncNoTracking(id);
+            var getDestination = await _uow.DestinationRepository.GetDestinationByIdAsyncNoTracking(id);
             if (getDestination != null)
             {
                 try
@@ -154,7 +155,7 @@ namespace HikeGroop.Controllers
 
                 };
 
-                await _destinationRepository.Update(editDestination);
+                await _uow.DestinationRepository.Update(editDestination);
 
                 return RedirectToAction("Index");
             }
@@ -168,7 +169,7 @@ namespace HikeGroop.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var dest = await _destinationRepository.GetDestinationByIdAsync(id);
+            var dest = await _uow.DestinationRepository.GetDestinationByIdAsync(id);
             if (dest == null) return View("Error");
 
             return View(dest);
@@ -177,7 +178,7 @@ namespace HikeGroop.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteDestination(int id)
         {
-            var dest = await _destinationRepository.GetDestinationByIdAsync(id);
+            var dest = await _uow.DestinationRepository.GetDestinationByIdAsync(id);
             if (dest == null) return View("Error");
 
             if (!string.IsNullOrEmpty(dest.Image))
@@ -185,7 +186,7 @@ namespace HikeGroop.Controllers
                 await _photoService.DeletePhotoAsync(dest.Image);
             }
 
-            await _destinationRepository.Delete(dest);
+            await _uow.DestinationRepository.Delete(dest);
             return RedirectToAction("Index");
         }
     }

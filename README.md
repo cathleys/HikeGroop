@@ -9,7 +9,7 @@ My goal is to simulate building real-world web application.
 ## How to navigate this project
 
 - Somewhat complex application logic: [Example code](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop/Controllers/GroupController.cs#L123)
-- This app implements Repository patterns: [Example database call](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop/Repositories/DestinationRepository.cs)
+- This app implements Repository and Unit of Work patterns: [Example database call](https://github.com/cathleys/HikeGroop/pull/41/commits/c528b812cc08707f04969146333034f3d5be159d)
 - CI/CD pipeline : [Example image](HikeGroop/wwwroot/assets/images/ci.JPG)
 - Unit test : [Example test](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop.Tests/Controllers/GroupControllerTests.cs#L35)
 
@@ -23,7 +23,6 @@ Testing is essential part of app development. XUnit with FluentAssertions is wha
 
 ## If I had more time I would change this
 
-- Implement Unit of Work pattern to centralized my repositories
 - Remove "?" in the Domain Models [Example Model](https://github.com/cathleys/HikeGroop/blob/main/HikeGroop/Models/Destination.cs)
 
 \***\*\*\*\*\***The End\***\*\*\*\*\*\***
@@ -42,15 +41,4 @@ This project is built with ASP.NET Core MVC, C#, HTML, CSS, Bootstrap, Javascrip
 
 ```bash
   git fork https://github.com/cathleys/HikeGroop.git
-```
-
-2. Create a local database. I use SQLite for development mode. Install the SQLite in Nuget package manager. You can see it in HikeGroop.csproj
-
-3. Add connection string to appsettings.Development.json.
-   Would look something like this or go to my firsts branches to see what it looked like before:
-
-```bash
- "ConnectionStrings" : {
-    "DefaultConnection" : "Data source = hikegroop.db"
- }
 ```

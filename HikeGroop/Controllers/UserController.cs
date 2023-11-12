@@ -1,34 +1,31 @@
-﻿using cloudscribe.Pagination.Models;
-using HikeGroop.Helpers;
+﻿using HikeGroop.Helpers;
 using HikeGroop.Interfaces;
 using HikeGroop.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace HikeGroop.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
-        private readonly IUserRepository _userRepository;
-
-        public UserController(IUserRepository userRepository)
+        private readonly IUnitOfWork _uow;
+        public UserController(IUnitOfWork uow)
         {
-            _userRepository = userRepository;
+            _uow = uow;
         }
-
 
         public async Task<IActionResult> Index(PaginationParams paginationParams,
         string searchString)
         {
-            var users = await _userRepository.GetMembers(paginationParams, searchString);
+            var users = await _uow.UserRepository.GetMembers(paginationParams, searchString);
             return View(users);
         }
 
-
-
         public async Task<IActionResult> Detail(string id)
         {
-            var user = await _userRepository.GetUserById(id);
+            var user = await _uow.UserRepository.GetUserById(id);
 
             if (user == null) return View("Error");
 

@@ -13,13 +13,12 @@ namespace HikeGroop.Extensions
             IConfiguration config)
         {
 
-            services.AddScoped<IDestinationRepository, DestinationRepository>();
-            services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.Configure<IPInfoSettings>(config.GetSection("IPInfoSettings"));
             services.AddScoped<IPhotoService, PhotoService>();
-            services.AddScoped<IDashboardRepository, DashboardRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddCloudscribePagination();
 
             return services;
