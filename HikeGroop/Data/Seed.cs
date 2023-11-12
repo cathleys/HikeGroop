@@ -1,6 +1,7 @@
 ﻿using HikeGroop.Data.Enums;
 using HikeGroop.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace HikeGroop.Data;
 
@@ -19,69 +20,60 @@ public class Seed
             if (!await roleManager.RoleExistsAsync(UserRoles.Member))
                 await roleManager.CreateAsync(new IdentityRole(UserRoles.Member));
 
-            //Users
+
             var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-            string adminUserEmail = "admin@gmail.com";
 
-            var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
-            if (adminUser == null)
+            if (await userManager.Users.AnyAsync()) return;
+
+            //Admins
+            var admin1 = new AppUser
             {
-                var newAdminUser = new AppUser
+                UserName = "admin",
+                Email = "admin@gmail.com",
+                EmailConfirmed = true,
+                HikerType = HikerType.Advance,
+                ProfileImageUrl = "https://randomuser.me/api/portraits/women/58.jpg",
+                Address = new Address
                 {
-                    UserName = "admin",
-                    Email = adminUserEmail,
-                    EmailConfirmed = true,
-                    HikerType = Enums.HikerType.Advance,
-                    ProfileImageUrl = "https://randomuser.me/api/portraits/women/58.jpg",
-                    Address = new Address
-                    {
-                        City = "Pasig City",
-                    }
-                };
-                await userManager.CreateAsync(newAdminUser, "Pa$$w0rd");
-                await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
-            }
+                    City = "Pasig City",
+                }
+            };
+            await userManager.CreateAsync(admin1, "Pa$$w0rd");
+            await userManager.AddToRoleAsync(admin1, UserRoles.Admin);
 
-            string adminUserEmail2 = "cathdev@gmail.com";
 
-            var adminUser2 = await userManager.FindByEmailAsync(adminUserEmail);
-            if (adminUser2 == null)
+
+            var admin2 = new AppUser
             {
-                var newAdminUser = new AppUser
+                UserName = "Cath Leyson",
+                Email = "cathdev@gmail.com",
+                EmailConfirmed = true,
+                HikerType = HikerType.Beginner,
+                Address = new Address
                 {
-                    UserName = "Cath Leyson",
-                    Email = adminUserEmail2,
-                    EmailConfirmed = true,
-                    HikerType = Enums.HikerType.Beginner,
-                    Address = new Address
-                    {
-                        City = "Pasig City",
-                    }
-                };
-                await userManager.CreateAsync(newAdminUser, "Pa$$w0rd");
-                await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
-            }
+                    City = "Pasig City",
+                }
+            };
+            await userManager.CreateAsync(admin2, "Pa$$w0rd");
+            await userManager.AddToRoleAsync(admin2, UserRoles.Admin);
 
-            string appUserEmail = "user@gmail.com";
 
-            var appUser = await userManager.FindByEmailAsync(appUserEmail);
-            if (appUser == null)
+            //member
+            var newAppUser = new AppUser
             {
-                var newAppUser = new AppUser
+                UserName = "user",
+                Email = "user@gmail.com",
+                EmailConfirmed = true,
+                HikerType = HikerType.Intermediate,
+                ProfileImageUrl = "https://randomuser.me/api/portraits/men/0.jpg",
+                Address = new Address
                 {
-                    UserName = "user",
-                    Email = appUserEmail,
-                    EmailConfirmed = true,
-                    HikerType = Enums.HikerType.Intermediate,
-                    ProfileImageUrl = "https://randomuser.me/api/portraits/men/0.jpg",
-                    Address = new Address
-                    {
-                        City = "Pasig City",
-                    }
-                };
-                await userManager.CreateAsync(newAppUser, "Pa$$w0rd");
-                await userManager.AddToRoleAsync(newAppUser, UserRoles.Member);
-            }
+                    City = "Pasig City",
+                }
+            };
+            await userManager.CreateAsync(newAppUser, "Pa$$w0rd");
+            await userManager.AddToRoleAsync(newAppUser, UserRoles.Member);
+
 
 
             //destination
