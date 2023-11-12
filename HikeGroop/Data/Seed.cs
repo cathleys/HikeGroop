@@ -31,7 +31,7 @@ public class Seed
                     UserName = "admin",
                     Email = adminUserEmail,
                     EmailConfirmed = true,
-                    HikerType = Enums.HikerType.Advance,
+                    HikerType = HikerType.Advance,
                     ProfileImageUrl = "https://randomuser.me/api/portraits/women/58.jpg",
                     Address = new Address
                     {
@@ -72,7 +72,7 @@ public class Seed
                     UserName = "user",
                     Email = appUserEmail,
                     EmailConfirmed = true,
-                    HikerType = Enums.HikerType.Intermediate,
+                    HikerType = HikerType.Intermediate,
                     ProfileImageUrl = "https://randomuser.me/api/portraits/men/0.jpg",
                     Address = new Address
                     {
