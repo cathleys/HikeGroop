@@ -65,13 +65,13 @@
 									<div class="sug-caro">
 										<div class="friend-box">
 											<figure>
-												<img alt="" src="~/assets/images/resources/sidebar-info.jpg">
+												<img src="~/assets/images/resources/sidebar-info.jpg">
 												<span>Members: 505K</span>
 											</figure>
 											<div class="frnd-meta">
-												<img alt="" src="~/assets/images/resources/frnd-figure2.jpg">
+												<img src="~/assets/images/resources/frnd-figure2.jpg">
 												<div class="frnd-name">
-													<a title="" href="#">Social Research</a>
+													<a>Hikers Research</a>
 													<span>biolabest</span>
 
 												</div>
@@ -80,17 +80,17 @@
 										</div>
 										<div class="friend-box">
 											<figure>
-												<img alt="" src="~/assets/images/resources/sidebar-info2.jpg">
+												<img src="~/assets/images/resources/sidebar-info2.jpg">
 												<span>Members: 505K</span>
 											</figure>
 											<div class="frnd-meta">
-												<img alt="" src="~/assets/images/resources/frnd-figure3.jpg">
+												<img src="~/assets/images/resources/frnd-figure3.jpg">
 												<div class="frnd-name">
-													<a title="" href="#">Bio Labest Group</a>
+													<a>Bio Labest Group</a>
 													<span>biolabest</span>
 
 												</div>
-												<a class="main-btn2" title="">Join Community</a>
+												<a class="main-btn2">Join Community</a>
 											</div>
 										</div>
 									</div>
@@ -101,21 +101,19 @@
 						<div class="col-lg-9">
 							<div class="group-feed">
 								<div class="group-avatar">
-									<img src="@Model.Image" alt="image cover">
+									<img style="height: 350px;" src="@Model.Image" alt="image cover">
 
 									<figure class="group-dp"><img src="@Model.Image" alt="avatar"></figure>
 								</div>
 								<div class="grp-info">
 									<h4>@Model.Name <span>@Model.Name</span></h4>
 
-
-
-
 									<ul>
 										<li><span>Created:</span> April 2020</li>
 										<li><span>Members:</span> 55K</li>
 										<li><span>City:</span> @Model.Address.City</li>
 										<li><span>Followers:</span> 2.2K</li>
+										<li><a class="main-btn2">Join Community</a></li>
 										<li class="btn-group">
 
 											@if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
@@ -131,21 +129,19 @@
 														asp-route-id="@Model.Id">Delete
 													</a>
 												</span>
-
-
-
 											}
 										</li>
 
 									</ul>
-
 								</div>
+
 								<div class="main-wraper">
 									<div class="grp-about">
 										<div class="row">
 											<div class="col-lg-8">
 												<h4>Info</h4>
 												<p>@Model.Description</p>
+
 											</div>
 											<div class="col-lg-4">
 												<div class="share-article">
@@ -173,3 +169,4 @@
 		</div>
 	</div>
 </section><!-- content -->
+<script src="~/assets/js/interested.js"></script>
