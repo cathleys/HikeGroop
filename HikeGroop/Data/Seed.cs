@@ -22,46 +22,40 @@ public class Seed
 
 
             var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-            string adminUserEmail = "admin@gmail.com";
+            if (await userManager.Users.AnyAsync()) return;
 
-            var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
-            if (adminUser == null)
+
+            var newAdminUser = new AppUser
             {
-                var newAdminUser = new AppUser
+                UserName = "admin",
+                Email = "admin@gmail.com",
+                EmailConfirmed = true,
+                HikerType = HikerType.Advance,
+                ProfileImageUrl = "https://randomuser.me/api/portraits/women/58.jpg",
+                Address = new Address
                 {
-                    UserName = "admin",
-                    Email = adminUserEmail,
-                    EmailConfirmed = true,
-                    HikerType = HikerType.Advance,
-                    ProfileImageUrl = "https://randomuser.me/api/portraits/women/58.jpg",
-                    Address = new Address
-                    {
-                        City = "Pasig City",
-                    }
-                };
-                await userManager.CreateAsync(newAdminUser, "Pa$$w0rd");
-                await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
-            }
+                    City = "Pasig City",
+                }
+            };
+            await userManager.CreateAsync(newAdminUser, "Pa$$w0rd");
+            await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
 
-            string adminUserEmail2 = "cathdev@gmail.com";
 
-            var adminUser2 = await userManager.FindByEmailAsync(adminUserEmail);
-            if (adminUser2 == null)
+
+            var newAdminUser2 = new AppUser
             {
-                var newAdminUser = new AppUser
+                UserName = "Cath Leyson",
+                Email = "cathdev@gmail.com",
+                EmailConfirmed = true,
+                HikerType = Enums.HikerType.Beginner,
+                Address = new Address
                 {
-                    UserName = "Cath Leyson",
-                    Email = adminUserEmail2,
-                    EmailConfirmed = true,
-                    HikerType = Enums.HikerType.Beginner,
-                    Address = new Address
-                    {
-                        City = "Pasig City",
-                    }
-                };
-                await userManager.CreateAsync(newAdminUser, "Pa$$w0rd");
-                await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
-            }
+                    City = "Pasig City",
+                }
+            };
+            await userManager.CreateAsync(newAdminUser2, "Pa$$w0rd");
+            await userManager.AddToRoleAsync(newAdminUser2, UserRoles.Admin);
+
 
             string appUserEmail = "user@gmail.com";
 
