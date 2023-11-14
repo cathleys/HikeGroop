@@ -51,7 +51,7 @@
 										<p>Edit information about your Groop</p>
 										<form method="post" asp-action="Edit" enctype="multipart/form-data">
 											<input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId">
-											<input type="hidden" value="AddressId" id="AddressId" />
+											<input type="hidden" id="AddressId" asp-for="AddressId">
 											<fieldset class="row merged-10">
 												<div class="mb-4 col-lg-6">
 													<label asp-for="Name"></label>

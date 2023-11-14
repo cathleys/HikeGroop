@@ -163,7 +163,7 @@ namespace HikeGroop.Controllers
                 };
 
                 await _uow.GroupRepository.Update(editGroup);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
 
             }
             else

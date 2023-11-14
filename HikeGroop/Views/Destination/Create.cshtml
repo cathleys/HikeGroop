@@ -49,7 +49,7 @@
                                         <p class="mb-4">This is your Destination public presence on HikeGroop.
                                         </p>
                                         <h6>Basic Profile</h6>
-                                        <p>Create information about your Groop</p>
+                                        <p>Create information</p>
                                         <form method="post" asp-action="Create" enctype="multipart/form-data">
                                             <input type="hidden" asp-for="AppUserId" name="AppUserId" id="AppUserId">
                                             <fieldset class="row merged-10">
@@ -61,7 +61,7 @@
 
                                                 <div class="mb-4 col-lg-12">
                                                     <label asp-for="Description">Description</label>
-                                                    <textarea row="4" asp-for="Description" class="uk-input"></textarea>
+                                                    <textarea rows="4" asp-for="Description" class="uk-input"></textarea>
                                                     <span asp-validation-for="Description" class="text-danger"></span>
                                                 </div>
 
@@ -155,10 +155,10 @@
                                                     <span asp-validation-for="Image" class="text-danger"></span>
                                                 </div>
 
-                                                <div class="mb-0 col-lg-12">
-                                                    <button type="submit" class="button primary circle">Create</button>
-                                                </div>
                                             </fieldset>
+                                            <div class="mb-0 col-lg-12">
+                                                <button type="submit" class="button primary circle">Create</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
