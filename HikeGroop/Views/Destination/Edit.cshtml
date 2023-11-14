@@ -49,10 +49,10 @@
                                         <p class="mb-4">This is your Destination public presence on HikeGroop.
                                         </p>
                                         <h6>Basic Profile</h6>
-                                        <p>Information about your Groop</p>
+                                        <p>Edit Information</p>
                                         <form method="post" asp-action="Edit" enctype="multipart/form-data">
                                             <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId">
-                                            <input type="hidden" value="ItineraryId" id="ItineraryId" />
+                                            <input type="hidden" id="ItineraryId" asp-for="ItineraryId">
                                             <fieldset class="row merged-10">
                                                 <div class="mb-4 col-lg-12">
                                                     <label asp-for="Title">Title</label>
@@ -62,7 +62,8 @@
 
                                                 <div class="mb-4 col-lg-12">
                                                     <label asp-for="Description">Description</label>
-                                                    <textarea row="4" asp-for="Description" class="uk-input"></textarea>
+                                                    <textarea rows="4" asp-for="Description"
+                                                        class="uk-textarea"></textarea>
                                                     <span asp-validation-for="Description" class="text-danger"></span>
                                                 </div>
 

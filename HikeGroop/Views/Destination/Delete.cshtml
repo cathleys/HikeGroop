@@ -46,9 +46,10 @@
                                         <p class="mb-4">This is your Destination public presence on HikeGroop.
                                         </p>
                                         <h6>Basic Profile</h6>
-                                        <p>Delete information about your Groop</p>
+                                        <p>Delete information</p>
                                         <form method="post" asp-action="Delete" enctype="multipart/form-data">
-                                            <input type="hidden" value="ItineraryId" id="ItineraryId" />
+                                            <input type="hidden" asp-for="ItineraryId" value="ItineraryId"
+                                                id="ItineraryId">
                                             <fieldset class="row merged-10">
                                                 <div class="mb-4 col-lg-12">
                                                     <label asp-for="Title">Title</label>
@@ -56,12 +57,16 @@
                                                     <span asp-validation-for="Title" class="text-danger"></span>
                                                 </div>
 
+                                                @* <div class="mb-4 col-lg-12">
+                                                <label asp-for="Description">Description</label>
+                                                <textarea rows="4" asp-for="Description" class="uk-input"></textarea>
+                                                <span asp-validation-for="Description" class="text-danger"></span>
+                                                </div> *@
                                                 <div class="mb-4 col-lg-12">
-                                                    <label asp-for="Description">Description</label>
-                                                    <textarea row="4" asp-for="Description" class="uk-input"></textarea>
+                                                    <label asp-for="Description"></label>
+                                                    <textarea asp-for="Description" class="uk-textarea"></textarea>
                                                     <span asp-validation-for="Description" class="text-danger"></span>
                                                 </div>
-
                                                 <div>
                                                     <h3>Itinerary</h3>
                                                 </div>
@@ -156,9 +161,9 @@
 
                                                 <div class="mb-0 col-lg-12">
                                                     <form action="Delete" method="post">
-                                                        <input type="hidden" asp-for="Id" />
+                                                        <input type="hidden" asp-for="Id">
                                                         <input type="submit" value="Confirm"
-                                                            class="btn btn-danger float-right mt-3" />
+                                                            class="btn btn-danger float-left mt-3">
                                                     </form>
                                                 </div>
 

@@ -1,3 +1,5 @@
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> UserManager
 <div class="responsive-header">
     <div class="logo res"><img src="~/assets/images/logo.png" alt=""><span>HikeGroop</span></div>
 
@@ -33,7 +35,7 @@
 
 <header class="">
     <div class="topbar stick">
-        <div class="logo"><img src="~/assets/images/logo.png" alt=""><span>HikeGroop</span></div>
+        <div class="logo"><img src="~/assets/images/logo.png"><span>HikeGroop</span></div>
         <div class="searches">
             <form method="get" asp-action="@ViewData["Action"]">
                 <input type="text" name="searchString" placeholder="Search... ">
@@ -42,7 +44,7 @@
             </form>
         </div>
         <ul class="web-elements">
-            Hello @User.Identity.Name
+            Hello @UserManager.GetUserName(User)
             <li>
                 <a href="#" title="">
                     <i>

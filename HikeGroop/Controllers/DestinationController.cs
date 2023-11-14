@@ -77,7 +77,7 @@ namespace HikeGroop.Controllers
                 };
 
                 await _uow.DestinationRepository.Add(newDestination);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
             else
             {
@@ -157,7 +157,7 @@ namespace HikeGroop.Controllers
 
                 await _uow.DestinationRepository.Update(editDestination);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
             else
             {
@@ -187,7 +187,7 @@ namespace HikeGroop.Controllers
             }
 
             await _uow.DestinationRepository.Delete(dest);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }
