@@ -35,18 +35,19 @@ public class GroupControllerTests
     public void GroupController_Index_ReturnsSuccess()
     {
         //Arrange - what do I need
-        var paginationParams = new PaginationParams
+        var userParams = new UserParams
         {
             PageNumber = 1,
             PageSize = 2,
+            SearchString = "snooze and shoes"
         };
 
-        var searchString = "snooze and shoes";
+
         var groups = A.Fake<PagedResult<Group>>();
-        A.CallTo(() => _uow.GroupRepository.GetGroupsPerPage(paginationParams, searchString)).Returns(groups);
+        A.CallTo(() => _uow.GroupRepository.GetGroupsPerPage(userParams)).Returns(groups);
 
         //Act
-        var result = _groupController.Index(paginationParams, searchString);
+        var result = _groupController.Index(userParams);
 
         //Assert - returns what I expect to return
         result.Should().BeOfType<Task<IActionResult>>();

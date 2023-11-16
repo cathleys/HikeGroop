@@ -23,11 +23,10 @@ namespace HikeGroop.Controllers
         }
 
 
-        public async Task<IActionResult> Index(PaginationParams paginationParams,
-        string searchString)
+        public async Task<IActionResult> Index(UserParams userParams)
         {
             var dests = await _uow.DestinationRepository
-            .GetDestinationsPerPage(paginationParams, searchString);
+            .GetDestinationsPerPage(userParams);
 
             return View(dests);
         }
@@ -40,10 +39,10 @@ namespace HikeGroop.Controllers
 
         public IActionResult Create()
         {
-            var currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            var userId = _httpContextAccessor.HttpContext.User.GetUserId();
             var createDestinationViewModel = new CreateDestinationViewModel
             {
-                AppUserId = currentUserId
+                AppUserId = userId
             };
             return View(createDestinationViewModel);
         }

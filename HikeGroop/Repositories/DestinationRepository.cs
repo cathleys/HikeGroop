@@ -50,30 +50,29 @@ namespace HikeGroop.Repositories
             return await _context.Destinations.ToListAsync();
         }
 
-        public async Task<PagedResult<Destination>> GetDestinationsPerPage(PaginationParams paginationParams,
-        string searchString)
+        public async Task<PagedResult<Destination>> GetDestinationsPerPage(UserParams userParams)
         {
             var query = _context.Destinations.AsQueryable();
 
-            var excludeRecords = (paginationParams.PageSize * paginationParams.PageNumber)
-             - paginationParams.PageSize;
+            var excludeRecords = (userParams.PageSize * userParams.PageNumber)
+             - userParams.PageSize;
 
             var destinationCount = await query.CountAsync();
 
-            if (!string.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(userParams.SearchString))
             {
-                query = query.Where(d => d.Title.Contains(searchString));
+                query = query.Where(d => d.Title.Contains(userParams.SearchString));
                 destinationCount = await query.CountAsync();
             }
-            query = query.Skip(excludeRecords).Take(paginationParams.PageSize);
+            query = query.Skip(excludeRecords).Take(userParams.PageSize);
 
 
             var result = new PagedResult<Destination>
             {
                 Data = await query.AsNoTracking().ToListAsync(),
                 TotalItems = destinationCount,
-                PageNumber = paginationParams.PageNumber,
-                PageSize = paginationParams.PageSize
+                PageNumber = userParams.PageNumber,
+                PageSize = userParams.PageSize
             };
             return result;
 

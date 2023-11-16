@@ -7,7 +7,7 @@ namespace HikeGroop.Interfaces
     public interface IGroupRepository
     {
         Task<IEnumerable<Group>> GetGroups();
-        Task<PagedResult<Group>> GetGroupsPerPage(PaginationParams paginationParams, string city);
+        Task<PagedResult<Group>> GetGroupsPerPage(UserParams userParams);
         Task<Group> GetGroupByIdAsync(int id);
         Task<Group> GetGroupByIdAsyncNoTracking(int id);
         Task<IEnumerable<Group>> GetGroupsByCity(string city);

@@ -37,10 +37,11 @@
                         <div class="measure right">
                             <i class="icofont-connection"></i>
                             <h2>Build or Connect with Hiking Community</h2>
-                          
+
 
                             <p>
-                                <a class="main-btn" asp-area="" asp-controller="Account" asp-action="Register">Join Now</a>
+                                <a class="main-btn" asp-area="" asp-controller="Account" asp-action="Register">Join
+                                    Now</a>
 
                             </p>
                         </div>
@@ -61,7 +62,8 @@
 
                         <h2>Advance your hiking experience</h2>
                         <span>Join our community of hikers and enthusiasts.</span>
-                        <a asp-area="" asp-controller="Account" asp-action="Register" class="main-btn" data-ripple="">Join Free Now</a>
+                        <a asp-area="" asp-controller="Account" asp-action="Register" class="main-btn"
+                            data-ripple="">Join Free Now</a>
                     </div>
                 </div>
             </div>
@@ -72,74 +74,17 @@
 <section>
     <div class="gap">
         <div class="container">
-            @if (Model.Groups == null)
-            {
-                <div class="col-lg-12">
-                    <div class="title">
-                        <h1>
-                            There are no hiking groups in your area!
-                            <a asp-area="" asp-controller="Account"
-                               asp-action="Login">Login</a> and create one!
-                        </h1>
-                    </div>
+            <div class="col-lg-12">
+                <div class="title">
+                    <h1>
+                        Discover Hiking Groups In Your Area.
+                        <a asp-controller="Account" asp-action="Login" style="text-decoration: underline;">Sign in</a>
+                        Now!
+                    </h1>
                 </div>
-            }
-            else
-            {
-                <div class="row remove-ext30">
-                    <div class="col-lg-12">
-                        <div class="title">
-                            <h3>Hiking Groups near @Model.City, @Model.Region</h3>
-                            <p>Find groups and join the community here</p>
-                        </div>
-                    </div>
+            </div>
 
-                    @foreach (var group in Model.Groups)
-                    {
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="blog-grid">
-                                <figure><img src="@group.Image" alt=""></figure>
-                                <div class="blog-meta">
-                                    <div class="blog-head">
-
-                                        <ul class="postby">
-                                            <li>
-                                                <figure><img src="@group.Image" alt=""></figure>
-
-                                            </li>
-                                            <li><i class="icofont-heart"></i><span>1.3k</span></li>
-                                        </ul>
-                                        <h4 class="blog-title">
-
-                                            @if(User.Identity.IsAuthenticated)
-                                            {
-                                                <a asp-area=""
-                                                   asp-controller="Group"
-                                                   asp-action="Detail"
-                                                   asp-route-id="@group.Id">
-                                                    @group.Name
-                                                 </a>
-
-                                            }else
-                                            {
-                                                <a asp-area=""
-                                                   asp-controller="Account"
-                                                   asp-action="Login"
-                                                >
-                                                    @group.Name
-                                                </a>
-                                            }
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                </div>
-
-            }
         </div>
     </div>
 </section><!-- events -->
