@@ -32,12 +32,13 @@
 
 									@foreach (var item in Model.Data)
 									{
-										<div class="col-lg-3 col-md-4 col-sm-4">
+										<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 											<div class="group-box">
 												<figure><img src="@item.Image"></figure>
 												<a>@item.Name</a>
-												<small>101 Members</small>
+
 												<br />
+
 												<div class="btn-group">
 													<a type="button" asp-controller="Group" asp-action="Detail"
 														asp-route-id="@item.Id" class="button soft-success">
@@ -55,6 +56,7 @@
 														</a>
 													}
 												</div>
+
 											</div>
 										</div>
 
@@ -80,42 +82,30 @@
 							<aside class="sidebar static right">
 								<div class="widget">
 									<h4 class="widget-title">Hiking Activities</h4>
+
 									<div class="popular-book">
 										<figure><img src="~/assets/images/resources/hikecomm.jpg" alt=""></figure>
 										<div class="book-about">
-											<h6><a href="#" title="">Treasure Mountain (Rizal)</a></h6>
+											<h6><a href="#" title="">Treasure Mountain</a></h6>
 											<span>Richard Ali</span>
-											<a href="#" title="Book Mark">
-												<i class="">
-													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-														viewBox="0 0 24 24" fill="none" stroke="currentColor"
-														stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-														class="feather feather-bookmark">
-														<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z">
-														</path>
-													</svg>
-												</i>
-											</a>
-										</div>
-										<div class="popular-book">
-											<figure><img src="~/assets/images/resources/hikecomm.jpg" alt=""></figure>
-											<div class="book-about">
-												<h6><a href="#" title="">Mt. Manalmon (Bulacan)</a></h6>
-												<span>Charmaine Mendoza</span>
-												<a href="#" title="Book Mark">
-													<i class="">
-														<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-															viewBox="0 0 24 24" fill="none" stroke="currentColor"
-															stroke-width="2" stroke-linecap="round"
-															stroke-linejoin="round" class="feather feather-bookmark">
-															<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z">
-															</path>
-														</svg>
-													</i>
-												</a>
-											</div>
 										</div>
 									</div>
+									<div class="popular-book">
+										<figure><img src="~/assets/images/resources/hikecomm1.jpg" alt=""></figure>
+										<div class="book-about">
+											<h6><a href="#" title="">Mt. Manalmon</a></h6>
+											<span>Yna Gonzales</span>
+										</div>
+									</div>
+									<div class="popular-book">
+										<figure><img src="~/assets/images/resources/hikecomm2.jpg" alt=""></figure>
+										<div class="book-about">
+											<h6><a href="#" title="">Geo Masungi Reserve</a></h6>
+											<span>Charmaine Mendoza</span>
+										</div>
+									</div>
+
+								</div>
 							</aside>
 						</div>
 					</div>
