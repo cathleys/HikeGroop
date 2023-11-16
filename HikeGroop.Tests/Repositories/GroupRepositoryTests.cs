@@ -88,19 +88,20 @@ public class GroupRepositoryTests
     public async void GroupRepository_GetGroupPerPage_ReturnsGroups()
     {
         // Arrange
-        var paginationParams = new PaginationParams
+        var userParams = new UserParams
         {
             PageNumber = 1,
             PageSize = 2,
+            SearchString = "Quezon City"
         };
 
-        var city = "Quezon City";
+
 
         var dataContext = await GetDbContext();
         var groupRepository = new GroupRepository(dataContext);
 
         // Act
-        var result = groupRepository.GetGroupsPerPage(paginationParams, city);
+        var result = groupRepository.GetGroupsPerPage(userParams);
 
         // Assert
         result.Should().BeOfType<Task<PagedResult<Group>>>();
