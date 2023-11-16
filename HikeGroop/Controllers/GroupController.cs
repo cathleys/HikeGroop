@@ -28,11 +28,10 @@ namespace HikeGroop.Controllers
         }
 
 
-        public async Task<IActionResult> Index(PaginationParams paginationParams,
-        string searchString)
+        public async Task<IActionResult> Index(UserParams userParams)
         {
             var groups = await _uow.GroupRepository
-            .GetGroupsPerPage(paginationParams, searchString);
+            .GetGroupsPerPage(userParams);
 
             return View(groups);
         }
